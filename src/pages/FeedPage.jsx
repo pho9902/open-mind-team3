@@ -1,10 +1,8 @@
-import Question from "@/components/containers/Question";
-import PostModal from "@/components/containers/PostModal";
+import QuestionList from "@/components/containers/Question";
 export default function FeedPage() {
   return (
     <div>
-      <PostModal />
-      <Question />
+      <QuestionList />
     </div>
   );
 }

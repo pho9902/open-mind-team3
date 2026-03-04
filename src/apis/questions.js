@@ -9,6 +9,7 @@ export async function getQuestions(subjectId) {
         offset: 0,
       },
     });
+    console.log("질문목록:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching questions:", error);
@@ -24,7 +25,7 @@ export async function postQuestions(subjectId, questionContent) {
     });
     return response.data;
   } catch (error) {
-    console.error("질문 생성 오류:", error);
+    console.error("Error creating question:", error);
     throw error;
   }
 }

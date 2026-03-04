@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postQuestions } from "@/apis/questions";
 
-export default function PostModal({ subjectId }) {
+export default function PostModal({ subjectId, onClose }) {
   const [questionContent, setQuestionContent] = useState("");
 
   const handleClick = async () => {
@@ -9,11 +9,10 @@ export default function PostModal({ subjectId }) {
     try {
       const result = await postQuestions(subjectId, questionContent);
       console.log("질문 생성 성공:", result);
+      onClose(); // 질문 생성 후 모달 닫기
     } catch (error) {
       console.error(error);
     }
-
-    setQuestionContent("");
   };
 
   return (

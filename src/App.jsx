@@ -14,7 +14,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="/feed" element={<FeedPage />} />
+          <Route path="/post" element={<FeedPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
