@@ -8,7 +8,9 @@ export const BasicButton = styled.button`
   height: 46px;
   padding: 8px 12px;
   border-radius: 8px;
+
   border: 2px solid transparent;
+
   gap: 8px;
 
   display: flex;
