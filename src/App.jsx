@@ -5,6 +5,7 @@ import { theme } from "@/styles/theme";
 import GlobalStyle from "@/styles/GlobalStyle";
 
 import HomePage from "@/pages/HomePage";
+import FeedPage from "@/pages/FeedPage";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
+          <Route path="/feed" element={<FeedPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
