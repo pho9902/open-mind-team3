@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://openmind-api.vercel.app/23-3/",
+  baseURL: import.meta.env.VITE_BASE_URL,
   timeout: 5000,
   headers: {
     "Content-Type": "application/json",
