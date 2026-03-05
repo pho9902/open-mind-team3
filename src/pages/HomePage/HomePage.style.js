@@ -1,20 +1,7 @@
 import styled from "styled-components";
-
 import BgImg from "@/assets/img/home-bg.svg";
-import HomeHeader from "@/components/containers/Home/HomeHeader";
-import HomeForm from "@/components/containers/Home/HomeForm";
 
-export default function HomePage() {
-  return (
-    <HomeContainer>
-      <HomeHeader />
-
-      <HomeForm />
-    </HomeContainer>
-  );
-}
-
-const HomeContainer = styled.div`
+export const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;

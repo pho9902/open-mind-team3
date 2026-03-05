@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 import { createSubject } from "@/apis/subject";
 import { Input } from "@/components/common/Input";
 import { BasicButton } from "@/components/common/Button";
+
+import * as S from "./HomeForm.style";
 
 export default function HomeForm() {
   const navigate = useNavigate();
@@ -27,31 +28,13 @@ export default function HomeForm() {
   };
 
   return (
-    <FormContainer onSubmit={handleCreateSubjectSubmit}>
+    <S.FormContainer onSubmit={handleCreateSubjectSubmit}>
       <Input
         value={input}
         placeholder="이름을 입력해주세요"
         onChange={(e) => setInput(e.target.value)}
       />
       <BasicButton type="submit">질문 받기</BasicButton>
-    </FormContainer>
+    </S.FormContainer>
   );
 }
-
-const FormContainer = styled.form`
-  background-color: ${({ theme }) => theme.colors.gray10};
-
-  width: 100%;
-  max-width: 400px;
-  padding: 32px;
-  border-radius: 16px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  @media (min-width: 768px) {
-    max-width: 456px;
-    padding: 40px;
-  }
-`;

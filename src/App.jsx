@@ -5,7 +5,8 @@ import { theme } from "@/styles/theme";
 import GlobalStyle from "@/styles/GlobalStyle";
 
 import { PublicRoute } from "@/components/routes/PublicRoute";
-import HomePage from "@/pages/HomePage";
+
+import HomePage from "@/pages/HomePage/HomePage";
 import PostTest from "@/components/containers/AnswerCard/PostTest";
 
 export default function App() {
