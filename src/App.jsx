@@ -6,6 +6,7 @@ import GlobalStyle from "@/styles/GlobalStyle";
 
 import { PublicRoute } from "@/components/routes/PublicRoute";
 import HomePage from "@/pages/HomePage";
+import PostTest from "@/components/containers/AnswerCard/PostTest";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
           <Route element={<PublicRoute />}>
             <Route index element={<HomePage />} />
           </Route>
+          <Route path="answer" element={<PostTest />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
