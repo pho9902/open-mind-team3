@@ -5,7 +5,7 @@ import { theme } from "@/styles/theme";
 import GlobalStyle from "@/styles/GlobalStyle";
 
 import HomePage from "@/pages/HomePage";
-import AnswerCard from "@/components/containers/AnswerCard";
+import PostTest from "@/components/containers/AnswerCard/PostTest";
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
-          <Route path="answer" element={<AnswerCard />} />
+          <Route path="answer" element={<PostTest />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
