@@ -1,4 +1,4 @@
-import QuestionList from "@/components/containers/Question";
+import QuestionList from "@/components/containers/Question/QuestionList";
 
 export default function FeedPage() {
   return (

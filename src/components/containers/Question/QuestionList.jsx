@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getQuestions } from "@/apis/questions";
 import QuestionCount from "@/components/containers/Question/QuestionCount";
 import QuestionItem from "@/components/containers/Question/QuestionItem";
-import PostModal from "@/components/containers/PostModal/index";
+import PostModal from "@/components/containers/PostModal/PostModal";
 
 export default function QuestionList({ subjectId }) {
   const [questions, setQuestions] = useState([]);
@@ -32,13 +32,17 @@ export default function QuestionList({ subjectId }) {
     <div>
       <div>
         <QuestionCount questions={questions} />
-        {questions.map((question) => (
-          <QuestionItem
-            key={question.id}
-            question={question}
-            answer={question.answer}
-          />
-        ))}
+        {questions.length === 0 ? (
+          <p>테스트질문없음아이콘</p>
+        ) : (
+          questions.map((question) => (
+            <QuestionItem
+              key={question.id}
+              question={question}
+              answer={question.answer}
+            />
+          ))
+        )}
       </div>
       <button
         onClick={() => setIsOpen(true)}
