@@ -4,6 +4,8 @@ import QuestionCount from "@/components/containers/Question/QuestionCount";
 import QuestionItem from "@/components/containers/Question/QuestionItem";
 import PostModal from "@/components/containers/PostModal/PostModal";
 
+import * as S from "./QuestionList.style";
+
 export default function QuestionList({ subjectId }) {
   const [questions, setQuestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -29,8 +31,8 @@ export default function QuestionList({ subjectId }) {
   }
 
   return (
-    <div>
-      <div>
+    <S.Container>
+      <S.QuestionListWrapper>
         <QuestionCount questions={questions} />
         {questions.length === 0 ? (
           <p>테스트질문없음아이콘</p>
@@ -43,7 +45,7 @@ export default function QuestionList({ subjectId }) {
             />
           ))
         )}
-      </div>
+      </S.QuestionListWrapper>
       <button
         onClick={() => setIsOpen(true)}
         style={{ background: "blue", color: "white" }} // 테스트 스타일
@@ -54,6 +56,6 @@ export default function QuestionList({ subjectId }) {
       {isOpen && (
         <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
       )}
-    </div>
+    </S.Container>
   );
 }

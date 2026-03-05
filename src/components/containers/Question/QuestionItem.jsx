@@ -1,4 +1,3 @@
-import React from "react";
 import ReactionButton from "@/components/containers/Question/ReactionButtons";
 
 export default function QuestionItem({ question, answer }) {
@@ -16,7 +15,7 @@ export default function QuestionItem({ question, answer }) {
       </div>
       {answer && (
         <div>
-          <img src alt="답변자이미지" />
+          <img src alt="답변자이미지" />d
           <div>
             <div>
               <span>답변자이름</span>
