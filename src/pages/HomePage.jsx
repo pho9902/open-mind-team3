@@ -1,3 +1,34 @@
+import styled from "styled-components";
+
+import BgImg from "@/assets/img/home-bg.svg";
+import HomeHeader from "@/components/containers/Home/HomeHeader";
+import HomeForm from "@/components/containers/Home/HomeForm";
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <HomeContainer>
+      <HomeHeader />
+
+      <HomeForm />
+    </HomeContainer>
+  );
 }
+
+const HomeContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
+  padding: 0 24px;
+  position: relative;
+
+  background-image: url(${BgImg});
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 120%;
+
+  @media (min-width: 768px) {
+    background-size: 100%;
+  }
+`;
