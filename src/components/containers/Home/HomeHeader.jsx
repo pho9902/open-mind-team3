@@ -2,14 +2,14 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ArrowRight2Icon } from "@/assets/icons/Icons";
-import LogoImg from "@/assets/img/logo.svg";
+import LogoImg from "@/assets/img/LogoImg";
 import { SecondButton } from "@/components/common/Button";
 
 export default function HomeHeader() {
   return (
     <>
       <LogoContainer>
-        <img src={LogoImg} alt="OpenMind Logo" />
+        <LogoImg />
       </LogoContainer>
 
       <HeaderSection>
@@ -29,10 +29,6 @@ const LogoContainer = styled.div`
   margin-bottom: 24px;
   display: flex;
   justify-content: center;
-
-  img {
-    width: 100%;
-  }
 
   @media (min-width: 768px) {
     max-width: 456px;
