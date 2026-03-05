@@ -9,7 +9,6 @@ export async function getQuestions(subjectId) {
         offset: 0,
       },
     });
-    console.log("질문목록:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching questions:", error);

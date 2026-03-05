@@ -5,7 +5,6 @@ export default function PostModal({ subjectId, onClose }) {
   const [questionContent, setQuestionContent] = useState("");
 
   const handleClick = async () => {
-    console.log("질문 생성 버튼 클릭됨");
     try {
       const result = await postQuestions(subjectId, questionContent);
       console.log("질문 생성 성공:", result);
