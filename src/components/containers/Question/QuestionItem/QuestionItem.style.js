@@ -20,13 +20,13 @@ export const AnswerStatus = styled.div`
   padding: 4px 12px;
 
   border: 1px solid
-    ${({ isAnswer, theme }) =>
-      !isAnswer ? theme.colors.gray40 : theme.colors.brown40};
+    ${({ $isAnswer, theme }) =>
+      !$isAnswer ? theme.colors.gray40 : theme.colors.brown40};
   border-radius: 8px;
 
   ${({ theme }) => theme.typography.caption1Medium};
-  color: ${({ isAnswer, theme }) =>
-    !isAnswer ? theme.colors.gray40 : theme.colors.brown40};
+  color: ${({ $isAnswer, theme }) =>
+    !$isAnswer ? theme.colors.gray40 : theme.colors.brown40};
   background-color: ${({ theme }) => theme.colors.gray10};
 `;
 
