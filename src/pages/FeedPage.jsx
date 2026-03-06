@@ -1,5 +1,5 @@
-import FeedHeader from "@/components/common/FeedHeader/FeedHeader";
-import FeedProfile from "@/components/common/FeedHeader/FeedProfile";
+import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
+import FeedProfile from "@/components/containers/Question/FeedHeader/FeedProfile";
 import QuestionList from "@/components/containers/Question/QuestionList";
 
 export default function FeedPage() {

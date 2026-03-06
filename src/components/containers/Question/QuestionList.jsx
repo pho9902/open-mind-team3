@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getQuestions } from "@/apis/questions";
-import QuestionCount from "@/components/containers/Question/QuestionCount";
-import QuestionItem from "@/components/containers/Question/QuestionItem";
+import { MessagesIcon } from "@/assets/icons/Icons";
+import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
+import QuestionItem from "@/components/containers/Question/QuestionItem/QuestionItem";
 import PostModal from "@/components/containers/PostModal/PostModal";
 
 import * as S from "./QuestionList.style";
@@ -46,12 +47,10 @@ export default function QuestionList({ subjectId }) {
           ))
         )}
       </S.QuestionListWrapper>
-      <button
-        onClick={() => setIsOpen(true)}
-        style={{ background: "blue", color: "white" }} // 테스트 스타일
-      >
-        질문 작성하기
-      </button>
+      <S.QuestionPostButton onClick={() => setIsOpen(true)}>
+        <MessagesIcon size={24} />
+        <span>질문 작성하기</span>
+      </S.QuestionPostButton>
 
       {isOpen && (
         <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
