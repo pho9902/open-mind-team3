@@ -1,4 +1,4 @@
-import * as S from "./QuestionCount.style";
+import * as S from "@/components/containers/Question/QuestionCount/QuestionCount.style";
 import { MessagesIcon } from "@/assets/icons/Icons";
 
 export default function QuestionCount({ questions }) {

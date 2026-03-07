@@ -1,4 +1,5 @@
-import * as S from "./QuestionItem.style";
+import * as S from "@/components/containers/Question/QuestionItem/QuestionItem.style";
+import AnswerItem from "@/components/containers/Question/AnswerItem/AnswerItem";
 import ReactionButtons from "@/components/containers/Question/ReactionButtons/ReactionButtons";
 
 export default function QuestionItem({ question, answer }) {
@@ -35,17 +36,8 @@ export default function QuestionItem({ question, answer }) {
         </S.ContentCategory>
         <S.Content>{question.content}</S.Content>
       </S.QuestionWrapper>
-      {answer && (
-        <div>
-          <img src alt="답변자이미지" />
-          <div>
-            <div>
-              <span>답변자이름</span>
-              <span>답변 날짜</span>
-            </div>
-            <p>답변</p>
-          </div>
-        </div>
+      {answer && question.id === answer.questionId && (
+        <AnswerItem answer={answer} />
       )}
       <S.Line />
       <ReactionButtons question={question} />
