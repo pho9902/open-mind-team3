@@ -27,7 +27,7 @@ export default function QuestionItem({ question, answer }) {
   return (
     <S.Container key={question.id}>
       <S.AnswerStatus $isAnswer={!!answer}>
-        {!answer ? "미답변" : answer.isReject ? "답변 거절" : "답변 완료"}
+        {!answer ? "미답변" : answer.isRejected ? "답변 거절" : "답변 완료"}
       </S.AnswerStatus>
       <S.QuestionWrapper>
         <S.ContentCategory>
@@ -36,9 +36,7 @@ export default function QuestionItem({ question, answer }) {
         </S.ContentCategory>
         <S.Content>{question.content}</S.Content>
       </S.QuestionWrapper>
-      {answer && question.id === answer.questionId && (
-        <AnswerItem answer={answer} />
-      )}
+      {answer && <AnswerItem answer={answer} />}
       <S.Line />
       <ReactionButtons question={question} />
     </S.Container>
