@@ -6,12 +6,10 @@ import { CountInput } from "@/components/common/Input/Input";
 import { BasicButton } from "@/components/common/Button/Button.style";
 
 export const DefaultDropdownButton = ({ onClick }) => (
-  <>
-    <S.DropdownButton type="button" onClick={onClick}>
-      <span>피드 만들기</span>
-      <ArrowDownIcon />
-    </S.DropdownButton>
-  </>
+  <S.DropdownButton type="button" onClick={onClick}>
+    <span>피드 만들기</span>
+    <ArrowDownIcon />
+  </S.DropdownButton>
 );
 
 const INPUT_LIMIT = 12;
