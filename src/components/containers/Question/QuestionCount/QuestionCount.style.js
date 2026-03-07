@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "@/styles/media";
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ export const Container = styled.div`
 export const CountText = styled.p`
   ${({ theme }) => theme.typography.body2Actor};
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     ${({ theme }) => theme.typography.body1Actor};
-  }
+  `}
 `;

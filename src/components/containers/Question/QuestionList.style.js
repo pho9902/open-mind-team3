@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "@/styles/media";
 import { FloatingButton } from "@/components/common/Button/Button.style";
 
 export const Container = styled.div`
@@ -8,13 +9,13 @@ export const Container = styled.div`
   padding: 0 24px;
   background-color: ${({ theme }) => theme.colors.gray20};
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     padding: 0 32px;
-  }
+  `}
 
-  @media (min-width: 1200px) {
+  ${media.pc`
     padding: 0 240px;
-  }
+  `}
 `;
 
 export const QuestionListWrapper = styled.div`

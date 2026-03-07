@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "@/styles/media";
 
 export const Container = styled.div`
   width: 100%;
@@ -13,10 +14,10 @@ export const AnswerImage = styled.img`
   height: 32px;
   border-radius: 9999px;
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     width: 48px;
     height: 48px;
-  }
+  `}
 `;
 
 export const AnswerContent = styled.div`
@@ -34,9 +35,9 @@ export const AnswerProfileName = styled.span`
   ${({ theme }) => theme.typography.caption1Actor};
   color: ${({ theme }) => theme.colors.gray60};
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     ${({ theme }) => theme.typography.body2Actor};
-  }
+  `}
 `;
 
 export const AnswerProfileDate = styled.span`

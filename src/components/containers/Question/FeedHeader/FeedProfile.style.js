@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { media } from "@/styles/media";
 
 export const Container = styled.div`
   position: absolute;
@@ -11,9 +12,9 @@ export const Container = styled.div`
   align-items: center;
   gap: 12px;
 
-  @media (min-width: 768px) {
+  ${media.tablet` 
     top: calc(234px - 180px);
-  }
+  `}
 `;
 
 // Todo: img로 변경 예정
@@ -22,10 +23,10 @@ export const Logo = styled.div`
   height: 49px;
   background-color: #ffffff;
 
-  @media (min-width: 768px) {
+  ${media.tablet` 
     width: 170px;
     height: 67px;
-  }
+  `}
 `;
 
 export const ProfileImage = styled.div`
@@ -36,18 +37,18 @@ export const ProfileImage = styled.div`
   // Todo: background-image로 변경 예정
   background-color: ${({ theme }) => theme.colors.brown40};
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     width: 136px;
     height: 136px;
-  }
+  `}
 `;
 
 export const ProfileName = styled.p`
   ${({ theme }) => theme.typography.h3};
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     ${({ theme }) => theme.typography.h2};
-  }
+  `}
 `;
 
 export const ShareButtons = styled.div`
