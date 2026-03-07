@@ -1,5 +1,5 @@
 import * as S from "@/components/containers/List/ListPage.style";
-import { SecondButton } from "@/components/common/Button";
+import { SecondButton } from "@/components/common/Button/Button.style";
 import { useNavigate } from "react-router-dom";
 import LogoImg from "@/assets/img/LogoImg";
 
