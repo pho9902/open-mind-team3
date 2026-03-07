@@ -1,7 +1,8 @@
 import * as S from "@/components/containers/Question/AnswerItem/AnswerItem.style";
+import { getFormattedDate } from "@/utils/getFormattedDate";
 
 export default function AnswerItem({ answer }) {
-  const { content, isRejected, createdAt } = answer;
+  const { content, isRejected } = answer;
 
   return (
     <S.Container>
@@ -12,8 +13,9 @@ export default function AnswerItem({ answer }) {
       />
       <S.AnswerContent>
         <S.AnswerProfile>
+          {/* Todo: 나중에 실제 답변자 이름으로 변경 필요 */}
           <S.AnswerProfileName>답변자이름</S.AnswerProfileName>
-          <S.AnswerProfileDate>{createdAt}</S.AnswerProfileDate>
+          <S.AnswerProfileDate>{getFormattedDate(answer)}</S.AnswerProfileDate>
         </S.AnswerProfile>
         <S.AnswerText $isRejected={isRejected}>
           {isRejected ? "답변거절" : content}
