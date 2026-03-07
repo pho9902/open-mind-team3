@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { Toaster } from "react-hot-toast";
 
 import { theme } from "@/styles/theme";
 import GlobalStyle from "@/styles/GlobalStyle";
@@ -10,6 +11,7 @@ import PostTest from "@/components/containers/AnswerCard/PostTest";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
+      <Toaster position="bottom-center" />
       <GlobalStyle />
       <BrowserRouter>
         <Routes>

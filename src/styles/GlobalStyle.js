@@ -36,6 +36,15 @@ const GlobalStyle = createGlobalStyle`
   img {
     display: block;
   }
+
+  .toast {
+    ${({ theme }) => theme.typography.caption1Regular}; 
+    background-color: ${({ theme }) => theme.colors.gray60};
+    color: ${({ theme }) => theme.colors.gray10} !important;
+    border-radius: 8px !important;
+    padding: 12px 20px !important;
+    box-shadow: ${({ theme }) => theme.shadows.pt3} !important;
+  }
 `;
 
 export default GlobalStyle;
