@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
  */
 export const openToast = (message, bgColor) => {
   return toast(message, {
-    duration: 15000,
+    duration: 5000,
     className: "toast",
     style: {
       background: bgColor,
