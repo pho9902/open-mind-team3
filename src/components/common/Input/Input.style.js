@@ -65,7 +65,7 @@ export const TextArea = styled.textarea`
   outline: none;
 
   background-color: ${({ theme }) => theme.colors.gray20};
-  ${({ theme }) => theme.typography.body3}
+  ${({ theme }) => theme.typography.body3};
   color: ${({ theme }) => theme.colors.gray60};
 
   &::placeholder {

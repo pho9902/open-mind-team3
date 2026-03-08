@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { media } from "@/styles/media";
+
 export const BasicButton = styled.button`
   ${({ theme }) => theme.typography.caption1Regular}
   color: ${({ theme }) => theme.colors.gray10};
@@ -29,12 +31,12 @@ export const BasicButton = styled.button`
     cursor: not-allowed;
   }
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     ${({ theme }) => theme.typography.body3}
 
     height: 46px;
     padding: 12px 24px;
-  }
+  `}
 `;
 
 export const SecondButton = styled.button`
@@ -68,12 +70,12 @@ export const SecondButton = styled.button`
     cursor: not-allowed;
   }
 
-  @media (min-width: 768px) {
+  ${media.tablet`
     ${({ theme }) => theme.typography.body3Actor}
 
-    height: 46px;
-    padding: 12px 24px;
-  }
+     height: 46px;
+     padding: 12px 24px;
+  `}
 `;
 
 export const FloatingButton = styled.button`

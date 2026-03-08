@@ -21,10 +21,7 @@ export const IconInput = ({
     )}
     <S.StyledInput {...props} />
     {RightIcon && (
-      <S.IconWrapper
-        onClick={onRightClick}
-        style={{ cursor: onRightClick ? "pointer" : "default" }}
-      >
+      <S.IconWrapper onClick={onRightClick}>
         <RightIcon size={20} color={theme.colors.gray40} />
       </S.IconWrapper>
     )}
