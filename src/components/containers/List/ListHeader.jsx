@@ -11,15 +11,13 @@ export default function ListHeader() {
   };
   return (
     <S.Header>
-      <S.LogoWrapper  onClick={() => navigate("/")}>
+      <S.LogoWrapper onClick={() => navigate("/")}>
         <LogoImg alt="OpenMind" />
       </S.LogoWrapper>
       {subjectId ? (
         <SecondButton onClick={handleGoAnswer}>답변하러 가기 →</SecondButton>
       ) : (
-        <SecondButton onClick={handleGoAnswer}>
-          피드 생성하기 →
-        </SecondButton>
+        <SecondButton onClick={handleGoAnswer}>피드 생성하기 →</SecondButton>
       )}
     </S.Header>
   );

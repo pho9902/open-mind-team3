@@ -1,40 +1,76 @@
 import styled from "styled-components";
 
 export const InputContainer = styled.div`
-  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   width: 100%;
+  height: 44px;
+  padding: 8px 12px;
 
-  display: flex;
-  align-items: center;
-`;
+  border: 1px solid ${({ theme }) => theme.colors.gray30};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.gray10};
 
-export const IconWrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  ${({ $isRight }) => ($isRight ? "right: 16px;" : "left: 16px;")}
-
-  pointer-events: ${({ $isRight }) => ($isRight ? "auto" : "none")};
-  cursor: ${({ $isRight }) => ($isRight ? "pointer" : "default")};
+  &:focus-within {
+    border-color: ${({ theme }) => theme.colors.brown40};
+  }
 `;
 
 export const StyledInput = styled.input`
-  ${({ theme }) => theme.typography.body3}
+  flex: 1;
+  min-width: 0;
 
+  border: none;
+  outline: none;
+  background: transparent;
+
+  ${({ theme }) => theme.typography.body3};
+  color: ${({ theme }) => theme.colors.gray50};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray40};
+  }
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  color: ${({ theme }) => theme.colors.gray40};
+  cursor: ${({ onClick }) => (onClick ? "pointer" : "default")};
+`;
+
+export const InputCount = styled.span`
+  margin-left: auto;
+  padding-left: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  ${({ theme }) => theme.typography.caption1Regular};
+  color: ${({ theme }) => theme.colors.gray40};
+`;
+
+export const TextArea = styled.textarea`
   width: 100%;
-  height: 46px;
+  min-height: 140px;
+  padding: 20px;
+  resize: none;
 
-  padding-left: ${({ $hasLeftIcon }) => ($hasLeftIcon ? "44px" : "16px")};
-  padding-right: ${({ $hasRightIcon }) => ($hasRightIcon ? "44px" : "16px")};
-
-  border: 1px solid ${({ theme }) => theme.colors.gray40};
+  border: 1px solid transparent;
   border-radius: 8px;
   outline: none;
+
+  background-color: ${({ theme }) => theme.colors.gray20};
+  ${({ theme }) => theme.typography.body3};
+  color: ${({ theme }) => theme.colors.gray60};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.gray40};
+  }
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.brown40};
