@@ -17,13 +17,10 @@ export const Container = styled.div`
   `}
 `;
 
-export const ProfileImage = styled.div`
+export const ProfileImage = styled.img`
   width: 104px;
   height: 104px;
   border-radius: 9999px;
-
-  // Todo: background-image로 변경 예정
-  background-color: ${({ theme }) => theme.colors.brown40};
 
   ${media.tablet`
     width: 136px;

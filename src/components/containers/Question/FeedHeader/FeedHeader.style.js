@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { media } from "@/styles/media";
-import { FloatingButton } from "@/components/common/Button/Button.style";
 
 export const Container = styled.div``;
 
@@ -27,7 +26,7 @@ export const ScrollContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 130px;
+  padding: 0 24px;
 
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: ${({ $visible }) =>
@@ -37,10 +36,26 @@ export const ScrollContainer = styled.div`
     transform 0.3s ease;
 
   box-shadow: ${({ theme }) => theme.shadows.pt2};
+
+  ${media.tablet`
+    padding: 0 32px;
+  `};
+
+  ${media.pc`
+    padding: 0 130px;
+  `};
 `;
 
 export const LeftSection = styled.div`
   flex: 1;
+
+  & svg {
+    padding: 6px;
+    &:hover {
+      border-radius: 9999px;
+      background-color: ${({ theme }) => theme.colors.gray30}66;
+    }
+  }
 `;
 
 export const ScrollFeedProfile = styled.div`
@@ -61,7 +76,11 @@ export const ProfileImage = styled.img`
 `;
 
 export const ProfileName = styled.h1`
-  ${({ theme }) => theme.typography.h3};
+  ${({ theme }) => theme.typography.body1};
+
+  ${media.tablet`
+    ${({ theme }) => theme.typography.h3};
+  `};
 `;
 
 export const RightSection = styled.div`
@@ -70,8 +89,27 @@ export const RightSection = styled.div`
   justify-content: flex-end;
 `;
 
-export const ShareButton = styled(FloatingButton)`
-  background-color: ${({ theme }) => theme.colors.gray10};
-  border: 1px solid ${({ theme }) => theme.colors.gray50};
-  color: ${({ theme }) => theme.colors.gray50};
+export const ShareButton = styled.button`
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  color: ${({ theme }) => theme.colors.gray60};
+
+  & span {
+    display: none;
+    ${({ theme }) => theme.typography.body3Actor};
+  }
+
+  ${media.tablet`
+    & span {
+      display: inline;
+    }
+  `};
+
+  &:hover {
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.colors.gray30}66;
+  }
 `;

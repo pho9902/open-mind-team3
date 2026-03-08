@@ -13,20 +13,20 @@ const FeedHeader = forwardRef(({ isScroll }, ref) => {
 
       <S.ScrollContainer $visible={isScroll}>
         <S.LeftSection>
-          <ArrowLeftIcon size={44} />
+          <ArrowLeftIcon size={46} />
         </S.LeftSection>
         <S.ScrollFeedProfile>
           {/* Todo: api 연결하면 질문자 이미지 받아오기 */}
           <S.ProfileImage
             src="https://picsum.photos/600/600"
-            alt="질문자이미지"
+            alt="질문자 이미지"
           />
-          <S.ProfileName>질문자이름</S.ProfileName>
+          <S.ProfileName>프로필이름</S.ProfileName>
         </S.ScrollFeedProfile>
         <S.RightSection>
           <S.ShareButton>
-            <BasicLinkIcon />
-            공유하기
+            <BasicLinkIcon size={20} />
+            <span>피드공유</span>
           </S.ShareButton>
         </S.RightSection>
       </S.ScrollContainer>
