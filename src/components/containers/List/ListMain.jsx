@@ -5,20 +5,28 @@ import ListCard from "@/components/containers/List/ListCard";
 
 export default function ListMain() {
   const [subjects, setSubjects] = useState([
-    { id: 1, name: "아무개", imageSource: "", questionCount: 2 },
-    { id: 2, name: "홍길동", imageSource: "", questionCount: 5 },
-    { id: 3, name: "김철수", imageSource: "", questionCount: 0 },
-    { id: 4, name: "이영희", imageSource: "", questionCount: 10 },
-    { id: 5, name: "박지성", imageSource: "", questionCount: 7 },
-    { id: 6, name: "손흥민", imageSource: "", questionCount: 15 },
+    { id: 7, name: "최유리", imageSource: "", questionCount: 3 },
+    { id: 8, name: "정민수", imageSource: "", questionCount: 8 },
+    { id: 9, name: "한지민", imageSource: "", questionCount: 1 },
+    { id: 10, name: "오세훈", imageSource: "", questionCount: 12 },
+    { id: 11, name: "유재석", imageSource: "", questionCount: 6 },
+    { id: 12, name: "강호동", imageSource: "", questionCount: 9 },
+    { id: 13, name: "이수민", imageSource: "", questionCount: 4 },
+    { id: 14, name: "박서준", imageSource: "", questionCount: 11 },
+    { id: 15, name: "김민지", imageSource: "", questionCount: 0 },
+    { id: 16, name: "장동건", imageSource: "", questionCount: 13 },
+    { id: 17, name: "송지효", imageSource: "", questionCount: 2 },
+    { id: 18, name: "이광수", imageSource: "", questionCount: 7 },
+    { id: 19, name: "정해인", imageSource: "", questionCount: 5 },
+    { id: 20, name: "박보영", imageSource: "", questionCount: 14 },
   ]);
-
 
   const [sortBy, setSortBy] = useState("latest");
   const [isOpen, setIsOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [isDesktop, setIsDesktop] = useState(
-    typeof window !== "undefined" ? window.innerWidth >= 1200 : true
+    typeof window !== "undefined" ? window.innerWidth >= 868 : true,
   );
   const handleSortClick = (value) => {
     setSortBy(value);
@@ -49,7 +57,6 @@ export default function ListMain() {
         </S.SelectContainer>
       </S.MainHeader>
 
-      {/* 3. 데이터 리스트 전달 */}
       <S.CardGrid>
         {subjects.map((item) => (
           <ListCard key={item.id} data={item} />
@@ -60,7 +67,7 @@ export default function ListMain() {
       {isDesktop ? (
         <div>{/* 여기에 페이지네이션 컴포넌트 추가 */}</div>
       ) : (
-        <div id="observer">{/* 여기에 무한 스크롤 타겟 추가 */}</div>
+        <div>{/* 여기에 무한 스크롤 타겟 추가 */}</div>
       )}
     </S.MainSection>
   );

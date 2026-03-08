@@ -95,7 +95,7 @@ export const CardGrid = styled.div`
 
   ${media.tablet`
     grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
-    padding: 0 32px; /* 최소 여백 32px */
+    padding: 0 32px;
     gap: 20px;
     `
   }
@@ -109,7 +109,7 @@ export const CardGrid = styled.div`
   }
 `;
 
-export const CardItem = styled.div`
+export const CardContainer = styled.div`
   background: ${({ theme }) => theme.colors.gray10};
   border: 1px solid ${({ theme }) => theme.colors.gray30};
   border-radius: 16px;
@@ -119,8 +119,8 @@ export const CardItem = styled.div`
   justify-content: space-between;
   height: 187px;
   cursor: pointer;
+  width: 100%;
   box-shadow: ${({ theme }) => theme.shadows.pt1};
-
 
   ${media.pc`
     
@@ -128,16 +128,54 @@ export const CardItem = styled.div`
     `
   }
 
-  .user-name {
-    ${({ theme }) => theme.typography.body1};
-    color: ${({ theme }) => theme.colors.gray60};
+`;
+
+export const CardProfile = styled.div`
+  background: ${({ theme }) => theme.colors.gray10};
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+`
+
+export const SubjectName = styled.div`
+  ${({ theme }) => theme.typography.body1};
+  color: ${({ theme }) => theme.colors.gray60};
+`;
+
+export const SubjectImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+
+`
+export const CardFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+
+`
+
+export const QuestionLabel = styled.div`
+  gap: 4px;
+  align-items: center;
+  display: flex;
+
+  svg {
+    width: 18px;
+    height: 18px;
   }
 
-  .question-count {
-    ${({ theme }) => theme.typography.caption1Regular};
-    color: ${({ theme }) => theme.colors.gray40};
-  }
+
+`
+export const QuestionCount = styled.div`
+  ${({ theme }) => theme.typography.body2};
+  color: ${({ theme }) => theme.colors.gray40};
 `;
+
 
 export const SelectButton = styled.button`
   width: 79px;
