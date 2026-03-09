@@ -5,7 +5,7 @@ import { SecondButton } from "@/components/common/Button/Button.style";
 import LogoImg from "@/assets/img/LogoImg";
 import { ArrowRight2Icon } from "@/assets/icons/Icons";
 
-export default function handleFeedAction() {
+export default function ListHeader() {
   const navigate = useNavigate();
   const myFeedId = localStorage.getItem("myFeedId");
   const handleGoAnswer = () => {
