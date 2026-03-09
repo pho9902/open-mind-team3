@@ -29,7 +29,6 @@ export const PaginationContainer = styled.nav`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
 
   margin-top: 40px;
 
