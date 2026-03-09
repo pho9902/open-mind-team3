@@ -56,3 +56,13 @@ export const InputButtonWrapper = styled.div`
 
   padding: 0 8px 8px;
 `;
+
+export const ErrorMessage = styled.span`
+  display: block;
+
+  margin-top: 8px;
+  padding-left: 4px;
+
+  ${({ theme }) => theme.typography.caption1Actor};
+  color: ${({ theme }) => theme.colors.red};
+`;

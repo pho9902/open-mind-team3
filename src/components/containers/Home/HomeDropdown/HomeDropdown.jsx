@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import * as S from "./HomeDropdown.style";
+import { validateName } from "@/utils/validation";
 import { ArrowDownIcon, ArrowUpIcon, PersonIcon } from "@/assets/icons/Icons";
 import { CountInput } from "@/components/common/Input/Input";
 import { BasicButton } from "@/components/common/Button/Button.style";
@@ -16,10 +17,20 @@ const INPUT_LIMIT = 12;
 
 export const Dropdown = ({ onClick }) => {
   const [input, setInput] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // TODO: api 및 기능 추가 (빈 인풋 방지, 공백 불가)
   const handleDropdownFormSubmit = (e) => {
     e.preventDefault();
+
+    const result = validateName(input);
+
+    if (!result.isValid) {
+      setErrorMessage(result.message);
+      return;
+    }
+
+    // TODO: 성공시 api 요청 후 리다이렉트
+    console.log("성공 테스트");
   };
 
   const handleInputChange = (e) => {
@@ -46,6 +57,7 @@ export const Dropdown = ({ onClick }) => {
           onChange={handleInputChange}
           placeholder="이름을 입력하세요"
         />
+        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
       </S.InputWrapper>
 
       <S.InputButtonWrapper>
