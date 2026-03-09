@@ -1,6 +1,6 @@
+import { ThumsUpIcon, ThumbsDownIcon } from "@/assets/icons/Icons";
+
 import * as S from "@/components/containers/Question/ReactionButtons/ReactionButtons.style";
-import { ThumsUpIcon } from "@/assets/icons/Icons";
-import { ThumbsDownIcon } from "@/assets/icons/Icons";
 
 export default function ReactionButtons({ question }) {
   return (
