@@ -5,6 +5,7 @@ import { FloatingButton } from "@/components/common/Button/Button.style";
 export const Container = styled.div`
   width: 100%;
   margin: 0 auto;
+  margin-top: 54px;
   margin-bottom: 126px;
   padding: 0 24px;
   background-color: ${({ theme }) => theme.colors.gray20};

@@ -16,4 +16,3 @@ export const LogoContainer = styled.div`
     margin-bottom: 40px;
   `}
 `;
-

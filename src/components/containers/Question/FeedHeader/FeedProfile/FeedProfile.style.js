@@ -3,7 +3,7 @@ import { media } from "@/styles/media";
 
 export const Container = styled.div`
   position: absolute;
-  top: calc(234px - 135px);
+  top: calc(234px - 150px);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -17,25 +17,10 @@ export const Container = styled.div`
   `}
 `;
 
-// Todo: img로 변경 예정
-export const Logo = styled.div`
-  width: 124px;
-  height: 49px;
-  background-color: #ffffff;
-
-  ${media.tablet` 
-    width: 170px;
-    height: 67px;
-  `}
-`;
-
-export const ProfileImage = styled.div`
+export const ProfileImage = styled.img`
   width: 104px;
   height: 104px;
   border-radius: 9999px;
-
-  // Todo: background-image로 변경 예정
-  background-color: ${({ theme }) => theme.colors.brown40};
 
   ${media.tablet`
     width: 136px;

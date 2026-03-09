@@ -1,7 +1,9 @@
-import * as S from "@/components/containers/Question/QuestionItem/QuestionItem.style";
+import { getFormattedDate } from "@/utils/getFormattedDate";
+
 import AnswerItem from "@/components/containers/Question/AnswerItem/AnswerItem";
 import ReactionButtons from "@/components/containers/Question/ReactionButtons/ReactionButtons";
-import { getFormattedDate } from "@/utils/getFormattedDate";
+
+import * as S from "@/components/containers/Question/QuestionItem/QuestionItem.style";
 
 export default function QuestionItem({ question, answer }) {
   return (

@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
 import { getQuestions } from "@/apis/questions";
 import { MessagesIcon } from "@/assets/icons/Icons";
+
+import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
-import QuestionItem from "@/components/containers/Question/QuestionItem/QuestionItem";
+import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
 
 import * as S from "./QuestionList.style";
@@ -11,6 +14,20 @@ export default function QuestionList({ subjectId }) {
   const [questions, setQuestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeaderVisible(!entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, [isLoading]);
 
   useEffect(() => {
     async function fetchQuestions() {
@@ -32,29 +49,22 @@ export default function QuestionList({ subjectId }) {
   }
 
   return (
-    <S.Container>
-      <S.QuestionListWrapper>
-        <QuestionCount questions={questions} />
-        {questions.length === 0 ? (
-          <p>테스트질문없음아이콘</p>
-        ) : (
-          questions.map((question) => (
-            <QuestionItem
-              key={question.id}
-              question={question}
-              answer={question.answer}
-            />
-          ))
-        )}
-      </S.QuestionListWrapper>
-      <S.QuestionPostButton onClick={() => setIsOpen(true)}>
-        <MessagesIcon size={24} />
-        <span>질문 작성하기</span>
-      </S.QuestionPostButton>
+    <>
+      <FeedHeader isScroll={isHeaderVisible} ref={headerRef} />
+      <S.Container>
+        <S.QuestionListWrapper>
+          <QuestionCount questions={questions} />
+          <QuestionItems questions={questions} />
+        </S.QuestionListWrapper>
+        <S.QuestionPostButton onClick={() => setIsOpen(true)}>
+          <MessagesIcon size={24} />
+          <span>질문 작성하기</span>
+        </S.QuestionPostButton>
 
-      {isOpen && (
-        <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
-      )}
-    </S.Container>
+        {isOpen && (
+          <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
+        )}
+      </S.Container>
+    </>
   );
 }
