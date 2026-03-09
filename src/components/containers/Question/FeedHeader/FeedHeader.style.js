@@ -64,7 +64,7 @@ export const ScrollContainer = styled.div`
 `;
 
 export const LeftSection = styled.div`
-  flex: 0.8;
+  flex: 0.7;
   & svg {
     padding: 6px;
     &:hover {
@@ -75,6 +75,7 @@ export const LeftSection = styled.div`
 `;
 
 export const ScrollFeedProfile = styled.div`
+  flex: 1;
   display: flex;
   align-items: center;
   cursor: pointer;

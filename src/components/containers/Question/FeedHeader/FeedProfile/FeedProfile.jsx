@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { scrollToTop } from "@/utils/windowScroll";
+
 import { BasicLinkIcon } from "@/assets/icons/Icons";
 import {
   ShareLinkIcon,
@@ -13,12 +14,19 @@ export default function FeedProfile({ $isScroll }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const handleToggle = () => {
+    if (!$isScroll) return;
     setIsDropdownOpen((prev) => !prev);
   };
 
   const handleProfileClick = () => {
     $isScroll && scrollToTop();
   };
+
+  useEffect(() => {
+    if (!$isScroll && isDropdownOpen) {
+      setIsDropdownOpen(false);
+    }
+  }, [$isScroll, isDropdownOpen]);
 
   return (
     <S.Container $isScroll={$isScroll}>
@@ -35,7 +43,7 @@ export default function FeedProfile({ $isScroll }) {
           <BasicLinkIcon />
         </S.MobileShareButton>
 
-        <S.ShareDropdown $isOpen={isDropdownOpen}>
+        <S.ShareDropdown $isScroll={$isScroll} $isOpen={isDropdownOpen}>
           <ShareLinkIcon />
           <ShareKakaoIcon />
           <ShareFacebookIcon />

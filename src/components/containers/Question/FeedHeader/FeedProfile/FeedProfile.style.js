@@ -13,7 +13,6 @@ export const Container = styled.div`
     css`
       flex-direction: row;
       width: 100%;
-      display: flex;
       justify-content: space-between;
       align-items: center;
 
@@ -44,14 +43,6 @@ export const Container = styled.div`
         `};
       }
 
-      ${ShareButtons} {
-        flex-direction: column;
-
-        ${media.tablet`
-          flex-direction: row;
-        `};
-      }
-
       ${MobileShareButton} {
         display: block;
 
@@ -59,18 +50,9 @@ export const Container = styled.div`
           display: none;
         `}
       }
-
-      ${ShareDropdown} {
-        display: none;
-        flex-direction: column;
-
-        ${media.tablet` 
-          display: flex;
-          flex-direction: row;
-          position: static;
-        `}
-      }
-    `}
+    `};
+`;
+`}
 `;
 
 export const ProfileContent = styled.div`
@@ -128,18 +110,28 @@ export const MobileShareButton = styled.button`
 `;
 
 export const ShareDropdown = styled.div`
+  // 스크롤 안 했을 때
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
   gap: 12px;
 
-  ${({ $isOpen }) =>
-    $isOpen &&
+  // 스크롤 했을 때
+  ${({ $isScroll, $isOpen }) =>
+    $isScroll &&
     css`
-      display: flex;
+      display: ${$isOpen ? "flex" : "none"};
+      flex-direction: column;
       position: absolute;
-      top: 70px;
-      right: 24px;
+      top: 55px;
+      right: -7px;
+      z-index: 100;
+
+      ${media.tablet`
+        display: flex;
+        position: static;
+        flex-direction: row;
+      `};
     `}
 `;
