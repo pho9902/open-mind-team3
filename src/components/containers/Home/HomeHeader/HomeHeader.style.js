@@ -16,20 +16,3 @@ export const LogoContainer = styled.div`
     margin-bottom: 40px;
   `}
 `;
-
-export const HeaderSection = styled.div`
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  margin-bottom: 24px;
-
-  ${media.tablet`
-    position: absolute;
-    top: 40px;
-    right: 50px;
-
-    width: auto;
-    margin-bottom: 0;
-  `}
-`;
