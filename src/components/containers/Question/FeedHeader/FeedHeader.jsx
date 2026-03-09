@@ -1,21 +1,15 @@
 import { forwardRef } from "react";
 
 import FeedProfile from "@/components/containers/Question/FeedHeader/FeedProfile/FeedProfile";
+import { scrollToTop } from "@/utils/windowScroll";
 import { ArrowLeftIcon, BasicLinkIcon } from "@/assets/icons/Icons";
 
 import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
 
 const FeedHeader = forwardRef(({ isScroll }, ref) => {
-  const handleScrollTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <S.Container ref={ref}>
-      <S.MainHeader $hidden={isScroll}>
+    <S.Container>
+      <S.MainHeader $hidden={isScroll} ref={ref}>
         <FeedProfile />
       </S.MainHeader>
 
@@ -23,7 +17,7 @@ const FeedHeader = forwardRef(({ isScroll }, ref) => {
         <S.LeftSection>
           <ArrowLeftIcon size={46} />
         </S.LeftSection>
-        <S.ScrollFeedProfile onClick={handleScrollTop}>
+        <S.ScrollFeedProfile onClick={scrollToTop}>
           {/* Todo: api 연결하면 질문자 이미지 받아오기 */}
           <S.ProfileImage
             src="https://picsum.photos/600/600"

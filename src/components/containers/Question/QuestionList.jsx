@@ -18,18 +18,16 @@ export default function QuestionList({ subjectId }) {
 
   const headerRef = useRef(null);
 
-  const handleScroll = () => {
-    if (!headerRef.current) return;
-    const elementTop = headerRef.current.getBoundingClientRect().bottom;
-    elementTop < 0 ? setIsHeaderVisible(true) : setIsHeaderVisible(false);
-  };
-
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsHeaderVisible(!entry.isIntersecting);
+      },
+      { threshold: 0 },
+    );
+    if (headerRef.current) observer.observe(headerRef.current);
+    return () => observer.disconnect();
+  }, [isLoading]);
 
   useEffect(() => {
     async function fetchQuestions() {
