@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { media } from "@/styles/media";
+import BgImg from "@/assets/img/home-bg.svg";
 
 export const Container = styled.div``;
 
@@ -11,8 +12,10 @@ export const MainHeader = styled.div`
   opacity: ${({ $hidden }) => ($hidden ? 0 : 1)};
   transition: opacity 0.3s ease;
 
-  // background-image로 변경 예정
-  background-color: ${({ theme }) => theme.colors.brown30};
+  background-image: url(${BgImg});
+  background-size: max(100%, 1200px) auto;
+  background-repeat: no-repeat;
+  background-position: center 70%;
 `;
 
 export const ScrollContainer = styled.div`
