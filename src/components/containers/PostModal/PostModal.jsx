@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { postQuestions } from "@/apis/questions";
 import { openToast } from "@/utils/toast";
-import { validateContent } from "@/utils/validation";
 
 import Modal from "@/components/common/Modal/index";
 import { CloseIcon, MessagesIcon } from "@/assets/icons/Icons";
@@ -13,15 +12,9 @@ const MAX_LENGTH = 20;
 
 export default function PostModal({ subjectId, onClose, onSuccess }) {
   const [questionContent, setQuestionContent] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = validateContent(questionContent);
-    if (!result.isValid) {
-      setErrorMessage(result.message);
-      return;
-    }
 
     try {
       await postQuestions(subjectId, questionContent);
@@ -40,9 +33,6 @@ export default function PostModal({ subjectId, onClose, onSuccess }) {
       value = value.slice(0, MAX_LENGTH);
     }
     setQuestionContent(value);
-
-    const validation = validateContent(value);
-    setErrorMessage(validation.isValid ? "" : validation.message);
   };
   const isButtonDisabled = questionContent.trim().length === 0;
 
@@ -79,7 +69,6 @@ export default function PostModal({ subjectId, onClose, onSuccess }) {
         <S.CharCount $isOver={questionContent.length > MAX_LENGTH}>
           {questionContent.length}/{MAX_LENGTH}
         </S.CharCount>
-        {errorMessage && <S.ErrorMessage>{errorMessage}</S.ErrorMessage>}
 
         <S.SubmitButton type="submit" disabled={isButtonDisabled}>
           질문 보내기

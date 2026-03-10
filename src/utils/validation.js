@@ -18,13 +18,3 @@ export const validateName = (name) => {
 
   return { isValid: true, validatedName: trimmedName };
 };
-
-export const validateContent = (content) => {
-  const trimmedContent = content.trim();
-
-  if (trimmedContent === "") {
-    return { isValid: false, message: "내용을 입력해 주세요." };
-  }
-
-  return { isValid: true, validatedContent: trimmedContent };
-};
