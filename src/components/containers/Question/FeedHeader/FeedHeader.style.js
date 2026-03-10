@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { media } from "@/styles/media";
+import BgImg from "@/assets/img/home-bg.svg";
 
 export const Container = styled.div``;
 
@@ -11,8 +12,27 @@ export const MainHeader = styled.div`
   opacity: ${({ $hidden }) => ($hidden ? 0 : 1)};
   transition: opacity 0.3s ease;
 
-  // background-image로 변경 예정
-  background-color: ${({ theme }) => theme.colors.brown30};
+  background-image: url(${BgImg});
+  background-size: max(100%, 1200px) auto;
+  background-repeat: no-repeat;
+  background-position: center 70%;
+`;
+
+export const ProfileContainer = styled.div`
+  position: absolute;
+  top: calc(234px - 150px);
+  left: 50%;
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+
+  ${media.tablet` 
+    top: calc(234px - 180px);
+  `}
 `;
 
 export const ScrollContainer = styled.div`
@@ -47,8 +67,7 @@ export const ScrollContainer = styled.div`
 `;
 
 export const LeftSection = styled.div`
-  flex: 1;
-
+  flex: 0.7;
   & svg {
     padding: 6px;
     &:hover {
@@ -59,63 +78,9 @@ export const LeftSection = styled.div`
 `;
 
 export const ScrollFeedProfile = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-  }
-`;
-
-export const ProfileImage = styled.img`
-  width: 44px;
-  height: 44px;
-  border-radius: 9999px;
-  display: none;
-
-  ${media.tablet` 
-    display:inline;
-  `}
-`;
-
-export const ProfileName = styled.h1`
-  ${({ theme }) => theme.typography.body1};
-
-  ${media.tablet`
-    ${({ theme }) => theme.typography.h3};
-  `};
-`;
-
-export const RightSection = styled.div`
   flex: 1;
   display: flex;
-  justify-content: flex-end;
-`;
-
-export const ShareButton = styled.button`
-  padding: 6px 12px;
-  display: flex;
   align-items: center;
-  gap: 8px;
-
-  color: ${({ theme }) => theme.colors.gray60};
-
-  & span {
-    display: none;
-    ${({ theme }) => theme.typography.body3Actor};
-  }
-
-  ${media.tablet`
-    & span {
-      display: inline;
-    }
-  `};
-
-  &:hover {
-    border-radius: 8px;
-    background-color: ${({ theme }) => theme.colors.gray30}66;
-  }
+  cursor: pointer;
+  flex: 1;
 `;

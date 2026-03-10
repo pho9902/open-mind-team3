@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 import { getQuestions } from "@/apis/questions";
 import { MessagesIcon } from "@/assets/icons/Icons";
@@ -18,6 +18,22 @@ export default function QuestionList({ subjectId }) {
 
   const headerRef = useRef(null);
 
+  const fetchQuestions = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await getQuestions(subjectId);
+      setQuestions(data.results);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [subjectId]);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [fetchQuestions]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -29,28 +45,13 @@ export default function QuestionList({ subjectId }) {
     return () => observer.disconnect();
   }, [isLoading]);
 
-  useEffect(() => {
-    async function fetchQuestions() {
-      setIsLoading(true);
-      try {
-        const data = await getQuestions(subjectId);
-        setQuestions(data.results);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchQuestions();
-  }, [subjectId]);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
   return (
     <>
-      <FeedHeader isScroll={isHeaderVisible} ref={headerRef} />
+      <FeedHeader $isScroll={isHeaderVisible} ref={headerRef} />
       <S.Container>
         <S.QuestionListWrapper>
           <QuestionCount questions={questions} />
@@ -62,7 +63,11 @@ export default function QuestionList({ subjectId }) {
         </S.QuestionPostButton>
 
         {isOpen && (
-          <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
+          <PostModal
+            subjectId={subjectId}
+            onClose={() => setIsOpen(false)}
+            onSuccess={fetchQuestions}
+          />
         )}
       </S.Container>
     </>
