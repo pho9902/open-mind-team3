@@ -23,6 +23,8 @@ export const Dropdown = ({ onClick }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
+  const isInputEmpty = input.trim().length === 0;
+
   const handleCreateFeed = async (inputName) => {
     try {
       const data = await createFeed(inputName);
@@ -76,7 +78,9 @@ export const Dropdown = ({ onClick }) => {
       </S.InputWrapper>
 
       <S.InputButtonWrapper>
-        <BasicButton type="submit">확인</BasicButton>
+        <BasicButton type="submit" disabled={isInputEmpty}>
+          확인
+        </BasicButton>
       </S.InputButtonWrapper>
     </S.DropdownForm>
   );
