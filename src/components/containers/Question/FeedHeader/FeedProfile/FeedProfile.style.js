@@ -1,20 +1,58 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { media } from "@/styles/media";
 
 export const Container = styled.div`
-  position: absolute;
-  top: calc(234px - 150px);
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
 
-  ${media.tablet` 
-    top: calc(234px - 180px);
-  `}
+  ${({ $isScroll }) =>
+    $isScroll &&
+    css`
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+
+      ${ProfileContent} {
+        flex-direction: row;
+
+        &:hover {
+          opacity: 0.8;
+          transition: opacity 0.3s ease;
+        }
+      }
+
+      ${ProfileImage} {
+        display: none;
+
+        ${media.tablet`
+          display: block;
+          width: 48px;
+          height: 48px;
+        `};
+      }
+
+      ${ProfileName} {
+        ${({ theme }) => theme.typography.body1};
+
+        ${media.tablet`
+          ${({ theme }) => theme.typography.h3};
+        `};
+      }
+    `};
+`;
+`}
+`;
+
+export const ProfileContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 `;
 
 export const ProfileImage = styled.img`
@@ -37,8 +75,55 @@ export const ProfileName = styled.p`
 `;
 
 export const ShareButtons = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
+
+  & button {
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+`;
+
+export const MobileShareButton = styled.button`
+  display: none;
+`;
+
+export const ShareDropdown = styled.div`
+  // 스크롤 안 했을 때
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 12px;
+
+  // 스크롤 했을 때
+  ${({ $isScroll, $isOpen }) =>
+    $isScroll &&
+    css`
+      display: ${$isOpen ? "flex" : "none"};
+      flex-direction: column;
+      position: absolute;
+      top: 55px;
+      right: -7px;
+      z-index: 100;
+
+      ${media.tablet`
+        display: flex;
+        position: static;
+        flex-direction: row;
+      `};
+    `}
 `;

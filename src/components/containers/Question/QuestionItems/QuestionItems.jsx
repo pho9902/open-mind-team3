@@ -1,12 +1,11 @@
+import EmptyQuestion from "@/components/containers/Question/EmptyQuestion/EmptyQuestion";
 import QuestionItem from "@/components/containers/Question/QuestionItem/QuestionItem";
-
-import * as S from "@/components/containers/Question/QuestionItems/QuestionItems.style";
 
 export default function QuestionItems({ questions }) {
   return (
     <>
       {questions.length === 0 ? (
-        <p>테스트질문없음아이콘</p>
+        <EmptyQuestion />
       ) : (
         questions.map((question) => (
           <QuestionItem
