@@ -51,9 +51,6 @@ export const ScrollContainer = styled.div`
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
   transform: ${({ $visible }) =>
     $visible ? "translateY(0)" : "translateY(-10px)"};
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
 
   box-shadow: ${({ theme }) => theme.shadows.pt2};
 
