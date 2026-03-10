@@ -5,6 +5,8 @@ import notFound from "@/assets/img/notFound-bg.svg";
 export const Container = styled.div`
   width: 100%;
   min-height: 100vh;
+  background-color: ${({ theme }) => theme.colors.gray20};
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,6 +18,7 @@ export const Image = styled.div`
   width: 100%;
   height: 234px;
   margin-bottom: 62px;
+
   background-image: url(${notFound});
   background-size: max(100%, 1200px) auto;
   background-repeat: no-repeat;
