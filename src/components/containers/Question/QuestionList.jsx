@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 
 import { getQuestions } from "@/apis/questions";
 import { MessagesIcon } from "@/assets/icons/Icons";
@@ -18,6 +18,22 @@ export default function QuestionList({ subjectId }) {
 
   const headerRef = useRef(null);
 
+  const fetchQuestions = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const data = await getQuestions(subjectId);
+      setQuestions(data.results);
+    } catch (error) {
+      console.error("Error fetching questions:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [subjectId]);
+
+  useEffect(() => {
+    fetchQuestions();
+  }, [fetchQuestions]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -28,21 +44,6 @@ export default function QuestionList({ subjectId }) {
     if (headerRef.current) observer.observe(headerRef.current);
     return () => observer.disconnect();
   }, [isLoading]);
-
-  useEffect(() => {
-    async function fetchQuestions() {
-      setIsLoading(true);
-      try {
-        const data = await getQuestions(subjectId);
-        setQuestions(data.results);
-      } catch (error) {
-        console.error("Error fetching questions:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-    fetchQuestions();
-  }, [subjectId]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -62,7 +63,11 @@ export default function QuestionList({ subjectId }) {
         </S.QuestionPostButton>
 
         {isOpen && (
-          <PostModal subjectId={subjectId} onClose={() => setIsOpen(false)} />
+          <PostModal
+            subjectId={subjectId}
+            onClose={() => setIsOpen(false)}
+            onSuccess={fetchQuestions}
+          />
         )}
       </S.Container>
     </>
