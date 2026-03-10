@@ -3,21 +3,6 @@ import { media } from "@/styles/media";
 
 export const ShareButtons = styled.div`
   position: relative;
-
-  & button {
-    cursor: pointer;
-    transition:
-      transform 0.15s ease,
-      opacity 0.2s ease;
-
-    &:hover {
-      opacity: 0.8;
-      transform: scale(1.05);
-    }
-    &:active {
-      transform: scale(0.9);
-    }
-  }
 `;
 
 export const MobileShareButton = styled.button`
