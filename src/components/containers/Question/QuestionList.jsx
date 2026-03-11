@@ -54,15 +54,17 @@ export default function QuestionList({ subjectId, isAnswer }) {
     <>
       <FeedHeader $isScroll={isHeaderVisible} ref={headerRef} />
       <S.Container>
-        <S.ButtonWrapper>
-          <S.DeleteFeedButton
-            onClick={
-              () => console.log("피드 삭제") /* Confrim 띄우고 기능구현 */
-            }
-          >
-            피드 삭제하기
-          </S.DeleteFeedButton>
-        </S.ButtonWrapper>
+        {isAnswer && (
+          <S.ButtonWrapper>
+            <S.DeleteFeedButton
+              onClick={
+                () => console.log("피드 삭제") /* Confrim 띄우고 기능구현 */
+              }
+            >
+              피드 삭제하기
+            </S.DeleteFeedButton>
+          </S.ButtonWrapper>
+        )}
         <S.QuestionListWrapper>
           <QuestionCount questions={questions} />
           <QuestionItems questions={questions} isAnswer={isAnswer} />
