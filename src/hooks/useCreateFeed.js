@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { createFeed } from "@/apis/subject";
+import { subjectApi } from "@/apis/subject";
 import { validateName } from "@/utils/validation";
 
 export const useCreateFeed = () => {
@@ -28,7 +28,7 @@ export const useCreateFeed = () => {
     try {
       setPending(true);
 
-      const data = await createFeed(inputName);
+      const data = await subjectApi.createFeed(inputName);
       localStorage.setItem("feedId", data.id);
 
       navigate(`/post/${data.id}/answer`);
