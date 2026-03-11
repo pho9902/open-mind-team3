@@ -29,7 +29,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   (response) => response.data,
   (error) => {
-    console.error("API Error:", error.response?.data || error.message);
+    console.error("API 에러:", error.response?.data || error.message);
     return Promise.reject(error);
   },
 );
