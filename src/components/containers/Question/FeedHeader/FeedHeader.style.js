@@ -36,6 +36,7 @@ export const ProfileContainer = styled.div`
 `;
 
 export const ScrollContainer = styled.div`
+  z-index: 100;
   width: 100%;
   height: 65px;
   background-color: ${({ theme }) => theme.colors.gray10};
