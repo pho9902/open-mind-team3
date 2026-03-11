@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { media } from "@/styles/media";
 import { FloatingButton } from "@/components/common/Button/Button.style";
+import { BasicButton } from "@/components/common/Button/Button.style";
 
 export const Container = styled.div`
   width: 100%;
@@ -30,6 +31,24 @@ export const QuestionListWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.colors.brown30};
   border-radius: 16px;
   background-color: ${({ theme }) => theme.colors.brown10};
+`;
+
+export const ButtonWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const DeleteFeedButton = styled(BasicButton)`
+  position: absolute;
+  top: -44px;
+  right: 0;
+
+  ${media.tablet`
+    top: -60px;
+  `}
 `;
 
 export const QuestionPostButton = styled(FloatingButton)`
