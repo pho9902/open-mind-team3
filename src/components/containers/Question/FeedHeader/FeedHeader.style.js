@@ -2,8 +2,6 @@ import styled from "styled-components";
 import { media } from "@/styles/media";
 import BgImg from "@/assets/img/home-bg.svg";
 
-export const Container = styled.div``;
-
 export const MainHeader = styled.div`
   width: 100%;
   height: 234px;
@@ -50,12 +48,6 @@ export const ScrollContainer = styled.div`
   padding: 0 24px;
 
   opacity: ${({ $visible }) => ($visible ? 1 : 0)};
-  transform: ${({ $visible }) =>
-    $visible ? "translateY(0)" : "translateY(-10px)"};
-  transition:
-    opacity 0.3s ease,
-    transform 0.3s ease;
-
   box-shadow: ${({ theme }) => theme.shadows.pt2};
 
   ${media.tablet`
@@ -67,21 +59,20 @@ export const ScrollContainer = styled.div`
   `};
 `;
 
-export const LeftSection = styled.div`
+export const PrevButton = styled.button`
   flex: 0.7;
   & svg {
     padding: 6px;
     &:hover {
-      border-radius: 9999px;
-      background-color: ${({ theme }) => theme.colors.gray30}66;
+      border-radius: 8px;
+      background-color: ${({ theme }) => theme.colors.gray20};
     }
   }
 `;
 
 export const ScrollFeedProfile = styled.div`
-  flex: 1;
+  flex: 0.75;
   display: flex;
   align-items: center;
   cursor: pointer;
-  flex: 1;
 `;
