@@ -6,9 +6,11 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons/Icons";
 
 export default function Pagination({ totalPage = 1 }) {
   const [searchParams] = useSearchParams();
-  const currentPage = Number(searchParams.get("page")) || 1;
 
+  const rawCurrentPage = Number(searchParams.get("page")) || 1;
   const safeTotalPage = Math.max(1, totalPage);
+  const currentPage =
+    rawCurrentPage > safeTotalPage ? safeTotalPage : rawCurrentPage;
 
   const pages = generatePage(currentPage, safeTotalPage);
   const prevPage = Math.max(1, currentPage - 1);
