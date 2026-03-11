@@ -4,7 +4,7 @@ import notFound from "@/assets/img/notFound-bg.svg";
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
+  min-height: 80vh;
   background-color: ${({ theme }) => theme.colors.gray20};
 
   display: flex;
@@ -12,6 +12,10 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 26px;
+
+  ${media.tablet`
+    min-height: 90vh;
+  `}
 `;
 
 export const Image = styled.div`
