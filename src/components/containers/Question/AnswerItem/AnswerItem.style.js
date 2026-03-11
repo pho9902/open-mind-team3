@@ -1,5 +1,7 @@
 import styled from "styled-components";
+
 import { media } from "@/styles/media";
+import { BasicButton } from "@/components/common/Button/Button.style";
 
 export const Container = styled.div`
   width: 100%;
@@ -50,4 +52,14 @@ export const AnswerText = styled.div`
   ${({ theme }) => theme.typography.body3};
   color: ${({ $isRejected, theme }) =>
     $isRejected ? theme.colors.red : theme.colors.gray60};
+`;
+
+export const InputSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const SubmitButton = styled(BasicButton)`
+  width: 100%;
 `;

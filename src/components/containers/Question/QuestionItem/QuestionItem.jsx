@@ -21,6 +21,7 @@ export default function QuestionItem({ question, answer, isAnswer }) {
       </S.QuestionWrapper>
       {answer && <AnswerItem answer={answer} />}
       {isAnswer && !answer && <AnswerInput />}
+      {/* 주헌님과 논의, useProfile 위치 결정후 props 결정 */}
       <S.Line />
       <ReactionButtons question={question} />
     </S.Container>
