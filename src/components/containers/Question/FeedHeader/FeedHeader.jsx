@@ -9,14 +9,16 @@ import FeedProfile from "@/components/containers/Question/FeedHeader/FeedProfile
 import ShareButtons from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons";
 import ScrollShareButtons from "@/components/containers/Question/FeedHeader/ScrollShareButtons/ScrollShareButtons";
 
-const FeedHeader = forwardRef(({ $isScroll }, ref) => {
+import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
+
+const FeedHeader = forwardRef(({ subjectData, $isScroll }, ref) => {
   return (
     <>
       {/* 스크롤 안했을 때 헤더  */}
       <S.MainHeader $hidden={$isScroll} ref={ref}>
         <S.ProfileContainer>
           <LogoImg width={170} as={Link} to="/" />
-          <FeedProfile />
+          <FeedProfile subjectData={subjectData} />
           <ShareButtons />
         </S.ProfileContainer>
       </S.MainHeader>
@@ -27,7 +29,7 @@ const FeedHeader = forwardRef(({ $isScroll }, ref) => {
           <ArrowLeftIcon size={44} />
         </S.PrevButton>
         <S.ScrollFeedProfile>
-          <FeedProfile $isScroll={$isScroll} />
+          <FeedProfile subjectData={subjectData} $isScroll={$isScroll} />
         </S.ScrollFeedProfile>
         <ScrollShareButtons $isScroll={$isScroll} />
       </S.ScrollContainer>

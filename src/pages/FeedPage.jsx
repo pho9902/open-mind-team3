@@ -22,6 +22,22 @@ export default function FeedPage() {
     if (subpath && !isAnswer) navigate("/err", { replace: true });
   }, [subpath, navigate]);
 
+  /* 질문대상자 정보 가져오기 */
+  useEffect(() => {
+    if (!subjectId) return;
+
+    const fetchSubjectData = async () => {
+      try {
+        const data = await subjectApi.getFeedData(subjectId);
+        setSubjectData(data);
+      } catch (error) {
+        // Todo: 에러 핸들링 UI 추가
+        console.error("Error fetching subject data:", error);
+      }
+    };
+    fetchSubjectData();
+  }, [subjectId]);
+
   /* header scroll observer */
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -33,22 +49,6 @@ export default function FeedPage() {
     if (headerRef.current) observer.observe(headerRef.current);
     return () => observer.disconnect();
   }, []);
-
-  /* subject data */
-  useEffect(() => {
-    if (!subjectId) return;
-
-    const fetchSubjectData = async () => {
-      try {
-        const data = await subjectApi.getFeedList(subjectId);
-        setSubjectData(data);
-      } catch (error) {
-        // Todo: 에러 핸들링 UI 추가
-        console.error("Error fetching subject data:", error);
-      }
-    };
-    fetchSubjectData();
-  }, [subjectId]);
 
   return (
     <>
