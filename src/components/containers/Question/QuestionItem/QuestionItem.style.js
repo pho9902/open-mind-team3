@@ -30,6 +30,13 @@ export const AnswerStatus = styled.div`
   background-color: ${({ theme }) => theme.colors.gray10};
 `;
 
+export const ItemHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const QuestionWrapper = styled.div`
   display: flex;
   flex-direction: column;
