@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 
-import { getQuestions } from "@/apis/questions";
+import { subjectApi } from "@/apis/subject";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
@@ -11,15 +11,18 @@ import * as S from "@/components/containers/Question/QuestionList.style";
 
 export default function QuestionList({ subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const fetchQuestions = useCallback(async () => {
+    if (!subjectId) return;
+
     setIsLoading(true);
     try {
-      const data = await getQuestions(subjectId);
+      const data = await subjectApi.getQuestions(subjectId);
       setQuestions(data.results);
     } catch (error) {
+      // Todo: 에러 핸들링 UI 추가
       console.error("Error fetching questions:", error);
     } finally {
       setIsLoading(false);

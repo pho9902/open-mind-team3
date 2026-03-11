@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { postQuestions } from "@/apis/questions";
+import { subjectApi } from "@/apis/subject";
 import { openToast } from "@/utils/toast";
 
 import { CloseIcon } from "@/assets/icons/CloseIcon";
@@ -18,7 +18,7 @@ export default function PostModal({ subjectId, onClose, onSuccess }) {
     e.preventDefault();
 
     try {
-      await postQuestions(subjectId, questionContent);
+      await subjectApi.createQuestion(subjectId, questionContent);
       if (onSuccess) onSuccess(); // 질문 생성 후 성공 콜백 호출
       onClose(); // 질문 생성 후 모달 닫기
     } catch (error) {
