@@ -23,7 +23,7 @@ export default function ShareButtons({ $isScroll }) {
   // Todo: 배포하고 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
   // Todo: meta 태그에 og:image, og:title, og:description 추가하기
   const shareToFacebook = () => {
-    const sharedLink = encodeURIComponent(currentUrl);
+    const sharedLink = encodeURIComponent(window.location.href);
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${sharedLink}`,
       "facebook-share-dialog",
@@ -31,10 +31,43 @@ export default function ShareButtons({ $isScroll }) {
     );
   };
 
+  const shareToKakao = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      console.log("kakao SDK 존재")
+      if (!kakao.isInitialized()) {
+        kakao.init(import.meta.env.VITE_KAKAO_KEY);
+      }
+
+      kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "OpenMind",  // Todo: 피드 대상자의 이름으로 변경하는 게 맞을 것 같음
+          description: "익명으로 질문하고 답변하는 커뮤니티",  // Todo: 피드 대상자의 이름으로 변경하는 게 맞을 것 같음
+          imageUrl:
+            "https://t1.daumcdn.net/kakaocotton/resources/store/img/default_share_img.png",  // Todo: 공유할 이미지 URL로 변경하기
+          link: {
+            mobileWebUrl: currentUrl,
+            webUrl: currentUrl,
+          },
+        },
+        buttons: [
+          {
+            title: "질문 보러가기",
+            link: {
+              mobileWebUrl: currentUrl,
+              webUrl: currentUrl,
+            },
+          },
+        ],
+      });
+    }
+  }
+
   return (
     <S.ShareListWrapper $isScroll={$isScroll}>
       <ShareLinkIcon onClick={handleCopyLink} />
-      <ShareKakaoIcon />
+      <ShareKakaoIcon onClick={shareToKakao} />
       <ShareFacebookIcon onClick={shareToFacebook} />
     </S.ShareListWrapper>
   );
