@@ -11,5 +11,6 @@ export const openToast = (message, bgColor) => {
     style: {
       background: bgColor,
     },
+    id: "unique-id",
   });
 };
