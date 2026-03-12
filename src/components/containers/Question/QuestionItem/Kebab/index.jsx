@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useTheme } from "styled-components";
 
-import {
-  CloseIcon,
-  EditIcon,
-  MoreIcon,
-  RejectIcon,
-} from "@/assets/icons/Icons";
+import { MoreIcon } from "@/assets/icons/MoreIcon";
+import { EditIcon } from "@/assets/icons/EditIcon";
+import { CloseIcon } from "@/assets/icons/CloseIcon";
+import { RejectIcon } from "@/assets/icons/RejectIcon";
+
 import * as S from "./Kebab.style";
 
 export default function Kebab() {

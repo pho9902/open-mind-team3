@@ -3,10 +3,11 @@ import { useState } from "react";
 import { postQuestions } from "@/apis/questions";
 import { openToast } from "@/utils/toast";
 
-import Modal from "@/components/common/Modal/index";
-import { CloseIcon, MessagesIcon } from "@/assets/icons/Icons";
+import { CloseIcon } from "@/assets/icons/CloseIcon";
+import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
 import * as S from "@/components/containers/PostModal/PostModal.style";
+import Modal from "@/components/common/Modal/index";
 
 const MAX_LENGTH = 20;
 

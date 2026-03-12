@@ -1,4 +1,5 @@
-import { ThumsUpIcon, ThumbsDownIcon } from "@/assets/icons/Icons";
+import { ThumbsDownIcon } from "@/assets/icons/ThumbsDownIcon";
+import { ThumsUpIcon } from "@/assets/icons/ThumbsUpIcon";
 
 import * as S from "@/components/containers/Question/ReactionButtons/ReactionButtons.style";
 

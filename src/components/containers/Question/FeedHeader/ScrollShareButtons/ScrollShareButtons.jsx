@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 
-import ShareButtons from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons";
-import { BasicLinkIcon } from "@/assets/icons/Icons";
+import { BasicLinkIcon } from "@/assets/icons/BasicLinkIcon";
 
 import * as S from "@/components/containers/Question/FeedHeader/ScrollShareButtons/ScrollShareButtons.style";
+import ShareButtons from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons";
 
 export default function ScrollShareButtons({ $isScroll }) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

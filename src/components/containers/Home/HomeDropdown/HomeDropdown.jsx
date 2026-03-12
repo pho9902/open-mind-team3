@@ -3,7 +3,9 @@ import { useEffect, useRef } from "react";
 import * as S from "./HomeDropdown.style";
 import { useCreateFeed } from "@/hooks/useCreateFeed";
 
-import { ArrowDownIcon, ArrowUpIcon, PersonIcon } from "@/assets/icons/Icons";
+import { ArrowUpIcon } from "@/assets/icons/ArrowUpIcon";
+import { PersonIcon } from "@/assets/icons/PersonIcon";
+import { ArrowDownIcon } from "@/assets/icons/ArrowDownIcon";
 import { CountInput } from "@/components/common/Input/Input";
 import { BasicButton } from "@/components/common/Button/Button.style";
 
