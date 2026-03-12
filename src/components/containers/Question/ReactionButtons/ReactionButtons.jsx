@@ -1,5 +1,5 @@
 import { ThumbsDownIcon } from "@/assets/icons/ThumbsDownIcon";
-import { ThumsUpIcon } from "@/assets/icons/ThumbsUpIcon";
+import { ThumbsUpIcon } from "@/assets/icons/ThumbsUpIcon";
 
 import * as S from "@/components/containers/Question/ReactionButtons/ReactionButtons.style";
 
@@ -7,7 +7,7 @@ export default function ReactionButtons({ question }) {
   return (
     <S.Container>
       <S.ReactionButton>
-        <ThumsUpIcon size={24} /> {/* Todo: ThumbsUpIcon icon 이름 변경*/}
+        <ThumbsUpIcon size={24} /> {/* Todo: ThumbsUpIcon icon 이름 변경*/}
         <S.ReactionCount>
           <span>좋아요</span>
           <span>100</span>
