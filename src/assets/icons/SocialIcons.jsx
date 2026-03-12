@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 import { theme } from "@/styles/theme";
-import {
-  BasicLinkIcon,
-  BasicKakaoIcon,
-  BasicFacebookIcon,
-} from "@/assets/icons/Icons";
+
+import { BasicLinkIcon } from "@/assets/icons/BasicLinkIcon";
+import { BasicKakaoIcon } from "@/assets/icons/BasicKakaoIcon";
+import { BasicFacebookIcon } from "@/assets/icons/BasicFacebookIcon";
 
 export const ShareLinkIcon = ({ ...props }) => {
   return (

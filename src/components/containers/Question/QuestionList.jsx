@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 
 import { getQuestions } from "@/apis/questions";
-import { MessagesIcon } from "@/assets/icons/Icons";
+import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
+import * as S from "./QuestionList.style";
 import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
-
-import * as S from "./QuestionList.style";
 
 export default function QuestionList({ subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);

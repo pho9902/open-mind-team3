@@ -1,8 +1,10 @@
 import { Link, useSearchParams } from "react-router-dom";
 
-import * as S from "./Pagination.style";
 import { generatePage } from "@/utils/pagination";
-import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons/Icons";
+import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
+import { ArrowRightIcon } from "@/assets/icons/ArrowRightIcon";
+
+import * as S from "./Pagination.style";
 
 export default function Pagination({ totalPage = 1 }) {
   const [searchParams] = useSearchParams();

@@ -2,13 +2,12 @@ import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import LogoImg from "@/assets/img/LogoImg";
+import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
+
+import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
 import FeedProfile from "@/components/containers/Question/FeedHeader/FeedProfile/FeedProfile";
 import ShareButtons from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons";
 import ScrollShareButtons from "@/components/containers/Question/FeedHeader/ScrollShareButtons/ScrollShareButtons";
-
-import { ArrowLeftIcon } from "@/assets/icons/Icons";
-
-import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
 
 const FeedHeader = forwardRef(({ $isScroll }, ref) => {
   return (

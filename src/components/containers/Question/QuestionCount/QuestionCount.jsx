@@ -1,4 +1,4 @@
-import { MessagesIcon } from "@/assets/icons/Icons";
+import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
 import * as S from "@/components/containers/Question/QuestionCount/QuestionCount.style";
 
