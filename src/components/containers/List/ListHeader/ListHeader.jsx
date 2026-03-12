@@ -5,6 +5,8 @@ import { ArrowRight2Icon } from "@/assets/icons/ArrowRight2Icon";
 
 import * as S from "@/components/containers/List/ListHeader/ListHeader.style";
 import { SecondButton } from "@/components/common/Button/Button.style";
+import LogoImg from "@/assets/img/LogoImg";
+import { ArrowRight2Icon } from "@/assets/icons/ArrowRight2Icon";
 
 export default function ListHeader() {
   const navigate = useNavigate();
@@ -18,9 +20,15 @@ export default function ListHeader() {
         <LogoImg alt="OpenMind" />
       </S.LogoWrapper>
       {myFeedId ? (
-        <SecondButton onClick={handleAuthNavigation}>답변하러 가기<ArrowRight2Icon width="18px" height="18px"/></SecondButton>
+        <SecondButton onClick={handleAuthNavigation}>
+          답변하러 가기
+          <ArrowRight2Icon width="18px" height="18px" />
+        </SecondButton>
       ) : (
-        <SecondButton onClick={handleAuthNavigation}>피드 생성하기<ArrowRight2Icon width="18px" height="18px"/></SecondButton>
+        <SecondButton onClick={handleAuthNavigation}>
+          피드 생성하기
+          <ArrowRight2Icon width="18px" height="18px" />
+        </SecondButton>
       )}
     </S.Header>
   );

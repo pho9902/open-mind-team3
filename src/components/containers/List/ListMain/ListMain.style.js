@@ -8,6 +8,7 @@ export const MainSection = styled.main`
 `;
 
 export const MainHeader = styled.div`
+
   display: flex;
   flex-direction: row;
   align-items: center;

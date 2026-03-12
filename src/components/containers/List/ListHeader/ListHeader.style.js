@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { media } from "@/styles/media";
 
-
 export const LogoWrapper = styled.div`
   width: 146px;
   height: 57px;
@@ -14,16 +13,19 @@ export const LogoWrapper = styled.div`
   }
 `;
 
-
 export const Header = styled.header`
   display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding-bottom: 10px;
+  background-color: ${({ theme }) => theme.colors.gray20};
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 40px;
   margin-bottom: 52px;
   gap: 20px;
-  // postion: sticky;
   width: 100%;
 
   ${media.tablet`
@@ -43,4 +45,3 @@ export const Header = styled.header`
   
     `}
 `;
-
