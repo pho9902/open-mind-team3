@@ -36,11 +36,11 @@ export default function ListMain() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPage = Number(searchParams.get("page")) || 1;
+  const totalPage = Math.ceil(subjects.length / LIMIT);
 
   const currentPage = Math.max(1, Math.min(rawPage, totalPage));  
   const startIndex = (currentPage - 1) * LIMIT;
   const endIndex = startIndex + LIMIT;
-  const totalPage = Math.ceil(subjects.length / LIMIT);
   
   const [visibleCount, setVisibleCount] = useState(LIMIT);
   const [sortBy, setSortBy] = useState("createdAt");

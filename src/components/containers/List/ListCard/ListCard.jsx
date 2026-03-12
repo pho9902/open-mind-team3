@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
-import {LogoImg} from "@/assets/img/LogoImg";
+import LogoImg from "@/assets/img/LogoImg";
 
 import * as S from "@/components/containers/List/ListCard/ListCard.style";
 

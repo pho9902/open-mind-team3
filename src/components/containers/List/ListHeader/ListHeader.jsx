@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-import LogoImg from "@/assets/img/LogoImg";
-import { ArrowRight2Icon } from "@/assets/icons/ArrowRight2Icon";
-
 import * as S from "@/components/containers/List/ListHeader/ListHeader.style";
 import { SecondButton } from "@/components/common/Button/Button.style";
 import LogoImg from "@/assets/img/LogoImg";
@@ -17,7 +14,7 @@ export default function ListHeader() {
   return (
     <S.Header>
       <S.LogoWrapper onClick={() => navigate("/")}>
-        <LogoImg alt="OpenMind" />
+        <LogoImg/>
       </S.LogoWrapper>
       {myFeedId ? (
         <SecondButton onClick={handleAuthNavigation}>
