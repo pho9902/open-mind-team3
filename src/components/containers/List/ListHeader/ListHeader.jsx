@@ -14,19 +14,12 @@ export default function ListHeader() {
   return (
     <S.Header>
       <S.LogoWrapper onClick={() => navigate("/")}>
-        <LogoImg/>
+        <LogoImg />
       </S.LogoWrapper>
-      {myFeedId ? (
-        <SecondButton onClick={handleAuthNavigation}>
-          답변하러 가기
-          <ArrowRight2Icon width="18px" height="18px" />
-        </SecondButton>
-      ) : (
-        <SecondButton onClick={handleAuthNavigation}>
-          피드 생성하기
-          <ArrowRight2Icon width="18px" height="18px" />
-        </SecondButton>
-      )}
+      <SecondButton onClick={handleAuthNavigation}>
+        {myFeedId ? "답변하러 가기" : "피드 생성하기"}
+        <ArrowRight2Icon width="18px" height="18px" />
+      </SecondButton>
     </S.Header>
   );
 }
