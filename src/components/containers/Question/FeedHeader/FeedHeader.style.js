@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { media } from "@/styles/media";
 import BgImg from "@/assets/img/home-bg.svg";
 
@@ -43,7 +43,7 @@ export const ScrollContainer = styled.div`
   left: 0;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 24px;
 
@@ -59,20 +59,25 @@ export const ScrollContainer = styled.div`
   `};
 `;
 
-export const PrevButton = styled.button`
-  flex: 0.7;
-  & svg {
-    padding: 6px;
-    &:hover {
-      border-radius: 8px;
-      background-color: ${({ theme }) => theme.colors.gray20};
-    }
-  }
-`;
-
 export const ScrollFeedProfile = styled.div`
-  flex: 0.75;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  margin-left: -22px;
+
+  ${({ $isScroll }) =>
+    !$isScroll &&
+    css`
+      &:hover {
+        opacity: 0.8;
+      }
+    `};
+`;
+
+export const ShareButtonsPosition = styled.div`
+  position: absolute;
+  right: 32px;
+  display: flex;
+  align-items: center;
 `;

@@ -57,7 +57,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
         <QuestionItems questions={questions} isAnswer={isAnswer} />
       </S.QuestionListWrapper>
 
-      <S.PrevButton as={Link} to={`/list`}>
+      <S.PrevButton as={Link} to="/list">
         <ArrowRight2Icon size={24} style={{ transform: "scaleX(-1)" }} />
       </S.PrevButton>
 

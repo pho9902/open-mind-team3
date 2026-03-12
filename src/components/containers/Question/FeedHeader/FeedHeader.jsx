@@ -2,12 +2,12 @@ import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 
 import LogoImg from "@/assets/img/LogoImg";
-import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
 
-import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
 import FeedProfile from "@/components/containers/Question/FeedHeader/FeedProfile/FeedProfile";
 import ShareButtons from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons";
 import ScrollShareButtons from "@/components/containers/Question/FeedHeader/ScrollShareButtons/ScrollShareButtons";
+
+import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style";
 
 const FeedHeader = forwardRef(({ subjectData, $isScroll }, ref) => {
   return (
@@ -23,13 +23,12 @@ const FeedHeader = forwardRef(({ subjectData, $isScroll }, ref) => {
 
       {/* 스크롤 헤더  */}
       <S.ScrollContainer $visible={$isScroll}>
-        <S.PrevButton as={Link} to="/list">
-          <ArrowLeftIcon size={44} />
-        </S.PrevButton>
         <S.ScrollFeedProfile>
           <FeedProfile subjectData={subjectData} $isScroll={$isScroll} />
         </S.ScrollFeedProfile>
-        <ScrollShareButtons $isScroll={$isScroll} />
+        <S.ShareButtonsPosition>
+          <ScrollShareButtons $isScroll={$isScroll} />
+        </S.ShareButtonsPosition>
       </S.ScrollContainer>
     </>
   );
