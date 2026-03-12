@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 import * as S from "@/components/containers/List/ListHeader/ListHeader.style";
 import { SecondButton } from "@/components/common/Button/Button.style";
-import LogoImg from "@/assets/img/LogoImg";
+import {LogoImg} from "@/assets/img/LogoImg";
 import { ArrowRight2Icon } from "@/assets/icons/ArrowRight2Icon";
 
 export default function ListHeader() {
