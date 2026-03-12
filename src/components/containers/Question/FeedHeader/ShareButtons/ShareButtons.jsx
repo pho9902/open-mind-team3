@@ -20,11 +20,22 @@ export default function ShareButtons({ $isScroll }) {
     }
   };
 
+  // Todo: 배포하고 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
+  // Todo: meta 태그에 og:image, og:title, og:description 추가하기
+  const shareToFacebook = () => {
+    const sharedLink = encodeURIComponent(currentUrl);
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${sharedLink}`,
+      "facebook-share-dialog",
+      "width=600,height=800,location=no,status=no,scrollbars=yes",
+    );
+  };
+
   return (
     <S.ShareListWrapper $isScroll={$isScroll}>
       <ShareLinkIcon onClick={handleCopyLink} />
       <ShareKakaoIcon />
-      <ShareFacebookIcon />
+      <ShareFacebookIcon onClick={shareToFacebook} />
     </S.ShareListWrapper>
   );
 }
