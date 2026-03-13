@@ -13,5 +13,9 @@ export const questionApi = {
 
   // 질문 답변 등록
   createAnswer: (questionId, content) =>
-    instance.post(`questions/${questionId}/answers/`, { content }),
+    instance.post(`questions/${questionId}/answers/`, {
+      content,
+      questionId,
+      isRejected: false,
+    }),
 };
