@@ -1,14 +1,15 @@
+const startDay = (date) => {
+  const d = new Date(date);
+  return (d.getFullYear(), d.getMonth(), d.getDate());
+};
+
 export const formatDate = {
   relative: (date) => {
     const target = new Date(date);
     const now = new Date();
 
-    const targetDay = new Date(
-      target.getFullYear(),
-      target.getMonth(),
-      target.getDate(),
-    );
-    const nowDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const targetDay = startDay(target);
+    const nowDay = startDay(now);
 
     const diffDay = Math.trunc((targetDay - nowDay) / (1000 * 60 * 60 * 24));
 
