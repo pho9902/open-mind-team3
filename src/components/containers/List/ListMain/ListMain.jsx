@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { useDeviceType } from "@/hooks/useDeviceType";
@@ -12,22 +12,62 @@ import InfiniteScrollObserver from "@/components/common/InfiniteScroll/InfiniteS
 
 export default function ListMain() {
   const [subjects, setSubjects] = useState([
-    { id: 1, name: "최유리", imageSource: "https://picsum.photos/600/600?random=1", questionCount: 3, createdAt: "2026-03-01T10:00:00" },
-    { id: 2, name: "정민수", imageSource: "https://picsum.photos/600/600?random=2", questionCount: 8, createdAt: "2026-03-02T11:20:00" },
-    { id: 3, name: "한지민", imageSource: "https://picsum.photos/600/600?random=3", questionCount: 1, createdAt: "2026-03-03T09:15:00" },
-    { id: 4, name: "abc", imageSource: "https://picsum.photos/600/600?random=4", questionCount: 12, createdAt: "2026-03-04T14:10:00" },
-    { id: 5, name: "유재석", imageSource: "", questionCount: 6, createdAt: "2026-03-05T16:30:00" },
-    { id: 6, name: "강호동", imageSource: "", questionCount: 9, createdAt: "2026-03-06T13:40:00" },
-    { id: 7, name: "박서준", imageSource: "", questionCount: 3, createdAt: "2026-03-07T08:10:00" },
-    { id: 8, name: "김태리", imageSource: "", questionCount: 8, createdAt: "2026-03-07T12:50:00" },
-    { id: 9, name: "이도현", imageSource: "", questionCount: 1, createdAt: "2026-03-08T09:00:00" },
-    { id: 10, name: "손흥민", imageSource: "", questionCount: 12, createdAt: "2026-03-08T15:25:00" },
-    { id: 11, name: "차은우", imageSource: "https://picsum.photos/600/600?random=11", questionCount: 5, createdAt: "2026-03-09T10:00:00" },
-    { id: 12, name: "아이유", imageSource: "https://picsum.photos/600/600?random=12", questionCount: 20, createdAt: "2026-03-10T11:00:00" },
-    { id: 13, name: "김고은", imageSource: "", questionCount: 7, createdAt: "2026-03-11T14:20:00" },
-    { id: 14, name: "공유", imageSource: "", questionCount: 2, createdAt: "2026-03-12T09:45:00" },
-    { id: 15, name: "장도연", imageSource: "", questionCount: 15, createdAt: "2026-03-13T16:10:00" },
-    { id: 16, name: "이광수", imageSource: "", questionCount: 4, createdAt: "2026-03-14T12:30:00" },
+    {
+      id: 1,
+      name: "최유리",
+      imageSource: "https://picsum.photos/600/600?random=1",
+      questionCount: 3,
+      createdAt: "2026-03-01T10:00:00",
+    },
+    {
+      id: 2,
+      name: "정민수",
+      imageSource: "https://picsum.photos/600/600?random=2",
+      questionCount: 8,
+      createdAt: "2026-03-02T11:20:00",
+    },
+    {
+      id: 3,
+      name: "한지민",
+      imageSource: "https://picsum.photos/600/600?random=3",
+      questionCount: 1,
+      createdAt: "2026-03-03T09:15:00",
+    },
+    {
+      id: 4,
+      name: "abc",
+      imageSource: "https://picsum.photos/600/600?random=4",
+      questionCount: 12,
+      createdAt: "2026-03-04T14:10:00",
+    },
+    {
+      id: 5,
+      name: "유재석",
+      imageSource: "",
+      questionCount: 6,
+      createdAt: "2026-03-05T16:30:00",
+    },
+    {
+      id: 6,
+      name: "강호동",
+      imageSource: "",
+      questionCount: 9,
+      createdAt: "2026-03-06T13:40:00",
+    },
+    {
+      id: 7,
+      name: "박서준",
+      imageSource: "",
+      questionCount: 3,
+      createdAt: "2026-03-07T08:10:00",
+    },
+    {
+      id: 8,
+      name: "김태리",
+      imageSource: "",
+      questionCount: 8,
+      createdAt: "2026-03-07T12:50:00",
+    },
   ]);
 
   const { isPC, isLargeTablet } = useDeviceType();
@@ -36,20 +76,27 @@ export default function ListMain() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPage = Number(searchParams.get("page")) || 1;
+  const totalPage = Math.ceil(subjects.length / LIMIT);
 
-  const currentPage = Math.max(1, Math.min(rawPage, totalPage));  
+  const currentPage = Math.max(1, Math.min(rawPage, totalPage));
   const startIndex = (currentPage - 1) * LIMIT;
   const endIndex = startIndex + LIMIT;
-  const totalPage = Math.ceil(subjects.length / LIMIT);
-  
+
   const [visibleCount, setVisibleCount] = useState(LIMIT);
-  const [sortBy, setSortBy] = useState("createdAt");
+  const [sortBy, setSortBy] = useState(() => {
+    return localStorage.getItem("sortBy") || "createdAt";
+  });
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const newParms = new URLSearchParams(searchParams);
+    newParms.set("page", "1");
+    setSearchParams(newParms);
+  },[]);
 
   const handleSortClick = (value) => {
     if (sortBy !== value) {
       setSortBy(value);
-
+      localStorage.setItem("sortBy", value);
       const newParams = new URLSearchParams(searchParams);
       newParams.set("page", "1");
       setSearchParams(newParams);
@@ -67,10 +114,7 @@ export default function ListMain() {
 
   const loadMore = useCallback(() => {
     if (visibleCount < subjects.length) {
-      setVisibleCount((prev) => {
-        const nextValue = prev + 3;
-        return nextValue;
-      });
+      setVisibleCount((prev) => prev + 3);
     }
   }, [visibleCount, subjects.length]);
 
