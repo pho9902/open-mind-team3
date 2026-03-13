@@ -29,7 +29,6 @@ export default function ReactionButtons({ question }) {
   };
 
   /* 싫어요 클릭 */
-
   const handleDislikeClick = async (e) => {
     e.preventDefault();
 
