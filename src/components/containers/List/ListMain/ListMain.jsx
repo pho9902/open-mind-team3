@@ -68,6 +68,41 @@ export default function ListMain() {
       questionCount: 8,
       createdAt: "2026-03-07T12:50:00",
     },
+        {
+      id: 41,
+      name: "abc",
+      imageSource: "https://picsum.photos/600/600?random=4",
+      questionCount: 12,
+      createdAt: "2026-03-04T14:10:00",
+    },
+    {
+      id: 51,
+      name: "유재석",
+      imageSource: "",
+      questionCount: 6,
+      createdAt: "2026-03-05T16:30:00",
+    },
+    {
+      id: 61,
+      name: "강호동",
+      imageSource: "",
+      questionCount: 9,
+      createdAt: "2026-03-06T13:40:00",
+    },
+    {
+      id: 71,
+      name: "박서준",
+      imageSource: "",
+      questionCount: 3,
+      createdAt: "2026-03-07T08:10:00",
+    },
+    {
+      id: 81,
+      name: "김태리",
+      imageSource: "",
+      questionCount: 8,
+      createdAt: "2026-03-07T12:50:00",
+    },
   ]);
 
   const { isPC, isLargeTablet } = useDeviceType();
@@ -87,11 +122,7 @@ export default function ListMain() {
     return localStorage.getItem("sortBy") || "createdAt";
   });
   const [isOpen, setIsOpen] = useState(false);
-  useEffect(() => {
-    const newParms = new URLSearchParams(searchParams);
-    newParms.set("page", "1");
-    setSearchParams(newParms);
-  },[]);
+
 
   const handleSortClick = (value) => {
     if (sortBy !== value) {
