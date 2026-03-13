@@ -12,6 +12,10 @@ const DEFAULT_OPTIONS = {
 export const openToast = (message) => {
   return toast(message, {
     ...DEFAULT_OPTIONS,
+    icon: null,
+    style: {
+      ...DEFAULT_OPTIONS.style,
+    },
   });
 };
 
