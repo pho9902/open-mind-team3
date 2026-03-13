@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { subjectApi } from "@/apis/subject";
 import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
@@ -9,9 +9,6 @@ import * as S from "@/components/containers/Question/QuestionList.style";
 
 export default function FeedPage() {
   const [subjectData, setSubjectData] = useState(null);
-  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
-
-  const headerRef = useRef(null);
 
   const navigate = useNavigate();
   const { subjectId, "*": subpath } = useParams();
@@ -38,25 +35,9 @@ export default function FeedPage() {
     fetchSubjectData();
   }, [subjectId]);
 
-  /* header scroll observer */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsHeaderVisible(!entry.isIntersecting);
-      },
-      { threshold: 0 },
-    );
-    if (headerRef.current) observer.observe(headerRef.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <>
-      <FeedHeader
-        subjectData={subjectData}
-        $isScroll={isHeaderVisible}
-        ref={headerRef}
-      />
+      <FeedHeader subjectData={subjectData} />
       <S.Container>
         <QuestionList subjectId={subjectId} isAnswer={isAnswer} />
       </S.Container>
