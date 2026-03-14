@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
-
-import LogoImg from "@/assets/img/LogoImg";
+import { subjectApi } from "@/apis/subject";
+import userPlaceholderImage from "@/assets/img/user-placeholderImage.svg";
 
 import * as S from "@/components/containers/List/ListCard/ListCard.style";
-
 
 export default function ListCard({ subject }) {
   const { name, imageSource, questionCount, id } = subject;
   const [isFront, setIsFront] = useState(true);
-  const [questionContent, setQuestionContent] = useState("질문 불러오는 중...");
+  const [questionContent, setQuestionContent] = useState(
+    `${name}님이 받은 질문 불러오는 중...`,
+  );
   const navigate = useNavigate();
   const handleMouseEnter = () => setIsFront(false);
   const handleMouseLeave = () => setIsFront(true);
@@ -19,6 +20,10 @@ export default function ListCard({ subject }) {
   const handleCardClick = () => {
     navigate(`/post/${id}`);
   };
+
+  // useEffect(async () => {
+  //   const response = await subjectApi.getQuestion(id,2,0);
+  // }, []);
 
   return (
     <S.CardContainer
@@ -32,7 +37,7 @@ export default function ListCard({ subject }) {
             {imageSource ? (
               <S.SubjectImage src={imageSource} />
             ) : (
-              <LogoImg width="120px" height="60px" />
+              <S.SubjectImage src={userPlaceholderImage} />
             )}
             <S.SubjectName>
               <span>{name}</span>
