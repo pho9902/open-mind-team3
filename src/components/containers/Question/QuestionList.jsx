@@ -52,7 +52,11 @@ export default function QuestionList({ subjectId, isAnswer }) {
       )}
       <S.QuestionListWrapper>
         <QuestionCount questions={questions} />
-        <QuestionItems questions={questions} isAnswer={isAnswer} />
+        <QuestionItems
+          questions={questions}
+          isAnswer={isAnswer}
+          fetchQuestions={fetchQuestions}
+        />
       </S.QuestionListWrapper>
       <S.QuestionPostButton onClick={() => setIsOpen(true)}>
         <MessagesIcon size={24} />
