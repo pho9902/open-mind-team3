@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import LogoImg from "@/assets/img/LogoImg";
 import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
@@ -13,6 +13,7 @@ import * as S from "@/components/containers/Question/FeedHeader/FeedHeader.style
 const FeedHeader = ({ subjectData }) => {
   const [isHeaderVisible, setIsHeaderVisible] = useState(false);
   const headerRef = useRef(null);
+  const navigate = useNavigate();
 
   /* header scroll observer */
   useEffect(() => {
@@ -31,22 +32,26 @@ const FeedHeader = ({ subjectData }) => {
       {/* 스크롤 안했을 때 헤더  */}
       <S.MainHeader $hidden={isHeaderVisible} ref={headerRef}>
         <S.ProfileContainer>
-          <LogoImg width={170} as={Link} to="/" />
+          <LogoImg width={170} />
           <FeedProfile subjectData={subjectData} />
           <ShareButtons />
         </S.ProfileContainer>
       </S.MainHeader>
-
       {/* 스크롤 헤더  */}
-      <S.ScrollContainer $visible={isHeaderVisible}>
-        <S.PrevButton as={Link} to="/list">
-          <ArrowLeftIcon size={44} />
-        </S.PrevButton>
-        <S.ScrollFeedProfile>
-          <FeedProfile subjectData={subjectData} $isScroll={isHeaderVisible} />
-        </S.ScrollFeedProfile>
-        <ScrollShareButtons $isScroll={isHeaderVisible} />
-      </S.ScrollContainer>
+      {isHeaderVisible && (
+        <S.ScrollContainer $visible={isHeaderVisible}>
+          <S.PrevButton onClick={() => navigate(-1)}>
+            <ArrowLeftIcon size={44} />
+          </S.PrevButton>
+          <S.ScrollFeedProfile>
+            <FeedProfile
+              subjectData={subjectData}
+              $isScroll={isHeaderVisible}
+            />
+          </S.ScrollFeedProfile>
+          <ScrollShareButtons $isScroll={isHeaderVisible} />
+        </S.ScrollContainer>
+      )}
     </>
   );
 };

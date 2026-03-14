@@ -51,10 +51,46 @@ export const DeleteFeedButton = styled(BasicButton)`
   `}
 `;
 
-export const QuestionPostButton = styled(FloatingButton)`
+export const FloatingGroup = styled.div`
   position: fixed;
   right: 24px;
   bottom: 24px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 16px;
+  z-index: 10;
+`;
+
+export const FloatingButtonWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+
+  & span {
+    display: none;
+    background-color: ${({ theme }) => theme.colors.brown10};
+    color: ${({ theme }) => theme.colors.brown40};
+    border: 1px solid ${({ theme }) => theme.colors.brown30};
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow: ${({ theme }) => theme.shadows.pt1};
+  }
+
+  &:hover {
+    & span {
+      display: block;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+`;
+
+export const MenuButton = styled(FloatingButton)`
   padding: 12px 14px;
 
   display: flex;
@@ -62,15 +98,16 @@ export const QuestionPostButton = styled(FloatingButton)`
   gap: 8px;
 
   box-shadow: ${({ theme }) => theme.shadows.pt3};
+  background-color: #8d7b68;
+  opacity: 0.8;
+`;
 
-  & span {
-    display: none;
-  }
+export const QuestionPostButton = styled(FloatingButton)`
+  padding: 12px 14px;
 
-  &:hover {
-    padding: 12px 24px;
-    & span {
-      display: inline;
-    }
-  }
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  box-shadow: ${({ theme }) => theme.shadows.pt3};
 `;

@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
+import { Link } from "react-router-dom";
 
 import { subjectApi } from "@/apis/subject";
+import { MenuIcon } from "@/assets/icons/MenuIcon";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
@@ -54,10 +56,21 @@ export default function QuestionList({ subjectId, isAnswer }) {
         <QuestionCount questions={questions} />
         <QuestionItems questions={questions} isAnswer={isAnswer} />
       </S.QuestionListWrapper>
-      <S.QuestionPostButton onClick={() => setIsOpen(true)}>
-        <MessagesIcon size={24} />
-        <span>질문 작성하기</span>
-      </S.QuestionPostButton>
+
+      <S.FloatingGroup>
+        <S.FloatingButtonWrapper>
+          <span>질문 목록보기</span>
+          <S.MenuButton as={Link} to={"/list"}>
+            <MenuIcon size={24} />
+          </S.MenuButton>
+        </S.FloatingButtonWrapper>
+        <S.FloatingButtonWrapper>
+          <span>질문 작성하기</span>
+          <S.QuestionPostButton onClick={() => setIsOpen(true)}>
+            <MessagesIcon size={24} />
+          </S.QuestionPostButton>
+        </S.FloatingButtonWrapper>
+      </S.FloatingGroup>
 
       {isOpen && (
         <PostModal
