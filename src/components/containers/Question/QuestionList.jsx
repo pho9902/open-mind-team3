@@ -7,6 +7,8 @@ import QuestionCount from "@/components/containers/Question/QuestionCount/Questi
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
 
+import QuestionListSkeleton from "@/components/containers/Question/QuestionListSkeleton/QuestionListSkeleton";
+
 import * as S from "@/components/containers/Question/QuestionList.style";
 
 export default function QuestionList({ subjectId, isAnswer }) {
@@ -39,6 +41,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
 
   return (
     <>
+      <QuestionListSkeleton />
       {isAnswer && (
         <S.ButtonWrapper>
           <S.DeleteFeedButton
