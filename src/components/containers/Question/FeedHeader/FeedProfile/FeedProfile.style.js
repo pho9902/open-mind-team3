@@ -48,6 +48,7 @@ export const ProfileImage = styled.img`
   width: 104px;
   height: 104px;
   border-radius: 9999px;
+  box-shadow: ${({theme})=>theme.shadows.pt1};
 
   ${media.tablet`
     width: 136px;
