@@ -8,7 +8,7 @@ import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
-import QuestionListSkeleton from "@/components/containers/Question/QuestionListSkeleton/QuestionListSkeleton";
+import SkeletonQuestion from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
@@ -37,7 +37,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
   }, [fetchQuestions]);
 
   if (isLoading) {
-    return <QuestionListSkeleton />;
+    return <SkeletonQuestion />;
   }
 
   return (

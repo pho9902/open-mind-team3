@@ -1,6 +1,6 @@
-import * as S from "@/components/containers/Question/QuestionListSkeleton/QuestionListSkeleton.style";
+import * as S from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion.style";
 
-export default function QuestionListSkeleton() {
+export default function SkeletonQuestion() {
   return (
     <S.Container>
       <S.CountSkeleton />
