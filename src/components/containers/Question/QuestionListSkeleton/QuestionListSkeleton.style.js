@@ -1,5 +1,25 @@
 import styled, { keyframes } from "styled-components";
 
+const shimmer = keyframes`
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+`;
+
+export const SkeletonItem = styled.div`
+  width: 100%;
+  height: ${(props) => props.height || 32}px;
+  border-radius: 8px;
+
+  background: linear-gradient(90deg, #eeeeee 25%, #e0e0e0 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+
+  animation: ${shimmer} 3s infinite ease-in-out;
+`;
+
 export const Container = styled.div`
   padding: 16px;
   display: flex;
@@ -13,9 +33,8 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.brown10};
 `;
 
-export const Count = styled.div`
-  width: 50%;
-  height: 32px;
+export const Count = styled(SkeletonItem)`
+  width: 60%;
 `;
 
 export const ContentWrapper = styled.div`
@@ -33,19 +52,16 @@ export const ContentWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.pt1};
 `;
 
-export const Status = styled.div`
-  width: 20%;
-  height: 32px;
+export const Status = styled(SkeletonItem)`
+  width: 30%;
 `;
 
-export const SubTitle = styled.div`
+export const SubTitle = styled(SkeletonItem)`
   width: 20%;
-  height: 32px;
 `;
 
-export const Title = styled.div`
+export const Title = styled(SkeletonItem)`
   width: 80%;
-  height: 32px;
   margin-top: -29px;
 `;
 
@@ -63,7 +79,7 @@ export const ButtonWrapper = styled.div`
   gap: 24px;
 `;
 
-export const Button = styled.div`
+export const Button = styled(SkeletonItem)`
   width: 150px;
   height: 50px;
 `;
