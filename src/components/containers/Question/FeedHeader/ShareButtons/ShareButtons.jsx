@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { openToast } from "@/utils/toast";
 import {
   ShareLinkIcon,
@@ -8,10 +9,12 @@ import {
 import * as S from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons.style";
 
 export default function ShareButtons({ subjectData, $isScroll }) {
-  const currentUrl = window.location.href;
+  const { pathname } = useLocation();
 
+  // Todo: 배포 후에 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
   const handleCopyLink = async () => {
     try {
+      const currentUrl = `${window.location.origin}${pathname}`;
       await navigator.clipboard.writeText(currentUrl);
       openToast("URL이 복사되었습니다");
     } catch (error) {
@@ -21,8 +24,8 @@ export default function ShareButtons({ subjectData, $isScroll }) {
   };
 
   // Todo: 배포하고 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
-  // Todo: meta 태그에 og:image, og:title, og:description 추가하기
   const shareToFacebook = () => {
+    const currentUrl = `${window.location.origin}${pathname}`;
     const sharedLink = encodeURIComponent(currentUrl);
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${sharedLink}`,
@@ -31,24 +34,24 @@ export default function ShareButtons({ subjectData, $isScroll }) {
     );
   };
 
+  // Todo: 배포 후 카카오개발자사이트에서 배포 링크로 변경 - 지금 로컬로 되는 상태
   const TEMPLATE_ID = 130655;
   const shareToKakao = () => {
-    if (window.Kakao) {
-      const kakao = window.Kakao;
+    const { Kakao } = window;
+    if (!Kakao) return;
 
-      if (!kakao.isInitialized()) {
-        kakao.init(import.meta.env.VITE_KAKAO_KEY);
-      }
-
-      kakao.Share.sendCustom({
-        templateId: TEMPLATE_ID,
-        templateArgs: {
-          path: currentUrl,
-          name: subjectData?.name || "",
-          like: subjectData?.like || 0,
-        },
-      });
+    if (!Kakao.isInitialized()) {
+      Kakao.init(import.meta.env.VITE_KAKAO_KEY);
     }
+
+    Kakao.Share.sendCustom({
+      templateId: TEMPLATE_ID,
+      templateArgs: {
+        path: pathname.startsWith("/") ? pathname.substring(1) : pathname,
+        name: subjectData?.name || "",
+        like: subjectData?.like || 0,
+      },
+    });
   };
 
   return (
