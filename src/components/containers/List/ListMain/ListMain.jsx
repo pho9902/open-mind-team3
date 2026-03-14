@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import { useDeviceType } from "@/hooks/useDeviceType";
 import { ArrowUpIcon } from "@/assets/icons/ArrowUpIcon";
 import { ArrowDownIcon } from "@/assets/icons/ArrowDownIcon";
+import subjectApi from "@/apis/subject";
 
 import * as S from "@/components/containers/List/ListMain/ListMain.style";
 import ListCard from "@/components/containers/List/ListCard/ListCard";
@@ -11,99 +12,8 @@ import Pagination from "@/components/common/Pagination/index";
 import InfiniteScrollObserver from "@/components/common/InfiniteScroll/InfiniteScrollObserver";
 
 export default function ListMain() {
-  const [subjects, setSubjects] = useState([
-    {
-      id: 1,
-      name: "최유리",
-      imageSource: "https://picsum.photos/600/600?random=1",
-      questionCount: 3,
-      createdAt: "2026-03-01T10:00:00",
-    },
-    {
-      id: 2,
-      name: "정민수",
-      imageSource: "https://picsum.photos/600/600?random=2",
-      questionCount: 8,
-      createdAt: "2026-03-02T11:20:00",
-    },
-    {
-      id: 3,
-      name: "한지민",
-      imageSource: "https://picsum.photos/600/600?random=3",
-      questionCount: 1,
-      createdAt: "2026-03-03T09:15:00",
-    },
-    {
-      id: 4,
-      name: "abc",
-      imageSource: "https://picsum.photos/600/600?random=4",
-      questionCount: 12,
-      createdAt: "2026-03-04T14:10:00",
-    },
-    {
-      id: 5,
-      name: "유재석",
-      imageSource: "",
-      questionCount: 6,
-      createdAt: "2026-03-05T16:30:00",
-    },
-    {
-      id: 6,
-      name: "강호동",
-      imageSource: "",
-      questionCount: 9,
-      createdAt: "2026-03-06T13:40:00",
-    },
-    {
-      id: 7,
-      name: "박서준",
-      imageSource: "",
-      questionCount: 3,
-      createdAt: "2026-03-07T08:10:00",
-    },
-    {
-      id: 8,
-      name: "김태리",
-      imageSource: "",
-      questionCount: 8,
-      createdAt: "2026-03-07T12:50:00",
-    },
-        {
-      id: 41,
-      name: "abc",
-      imageSource: "https://picsum.photos/600/600?random=4",
-      questionCount: 12,
-      createdAt: "2026-03-04T14:10:00",
-    },
-    {
-      id: 51,
-      name: "유재석",
-      imageSource: "",
-      questionCount: 6,
-      createdAt: "2026-03-05T16:30:00",
-    },
-    {
-      id: 61,
-      name: "강호동",
-      imageSource: "",
-      questionCount: 9,
-      createdAt: "2026-03-06T13:40:00",
-    },
-    {
-      id: 71,
-      name: "박서준",
-      imageSource: "",
-      questionCount: 3,
-      createdAt: "2026-03-07T08:10:00",
-    },
-    {
-      id: 81,
-      name: "김태리",
-      imageSource: "",
-      questionCount: 8,
-      createdAt: "2026-03-07T12:50:00",
-    },
-  ]);
+  const [subjects, setSubjects] = useState([]);
+  const [totalCount, setTotalCount] = useState(0);
 
   const { isPC, isLargeTablet } = useDeviceType();
   const isDesktopMode = isPC || isLargeTablet;
@@ -111,7 +21,7 @@ export default function ListMain() {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const rawPage = Number(searchParams.get("page")) || 1;
-  const totalPage = Math.ceil(subjects.length / LIMIT);
+  const totalPage = Math.ceil(totalCount / LIMIT);
 
   const currentPage = Math.max(1, Math.min(rawPage, totalPage));
   const startIndex = (currentPage - 1) * LIMIT;
@@ -123,6 +33,30 @@ export default function ListMain() {
   });
   const [isOpen, setIsOpen] = useState(false);
 
+  useEffect(()=> {
+    const fetchSubject = async () => {
+      try{
+        let limit = LIMIT;
+        let offset = isDesktopMode ? (currentPage-1)*limit : subjects.length;
+        const response = await subjectApi.getFeedList(limit, offset);
+        const {count, results} = response;
+        setTotalCount(count);
+        if(isDesktopMode){
+          setSubjects(results);
+        }
+        else{
+          setSubjects(subjects.length ==0 ? results : (prev)=> [...prev,])
+        }
+      }
+      catch(error){
+        //로딩 스피너나 토스트??
+
+      }
+
+
+    }
+
+  },[isDesktopMode, currentPage, sortBy])
 
   const handleSortClick = (value) => {
     if (sortBy !== value) {
@@ -131,6 +65,7 @@ export default function ListMain() {
       const newParams = new URLSearchParams(searchParams);
       newParams.set("page", "1");
       setSearchParams(newParams);
+      setSubjects([]);
     }
     setIsOpen(false);
   };
