@@ -23,7 +23,7 @@ export default function PostModal({ subjectId, onClose, onSuccess }) {
       onClose(); // 질문 생성 후 모달 닫기
     } catch (error) {
       console.error("질문 생성 실패:", error);
-      openToast("질문 생성에 실패했습니다. 다시 시도해주세요.", "#FF0000");
+      openToast.error("질문 생성에 실패했습니다. 다시 시도해주세요.");
     }
   };
 

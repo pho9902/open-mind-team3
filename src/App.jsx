@@ -14,7 +14,7 @@ import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Toaster position="bottom-center" />
+      <Toaster position="bottom-center" containerStyle={{ bottom: 60 }} />
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
