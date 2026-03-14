@@ -4,16 +4,18 @@ export default function QuestionListSkeleton() {
   return (
     <S.Container>
       <S.Count />
-      <S.ContentWrapper>
-        <S.Status />
-        <S.SubTitle />
-        <S.Title />
-        <S.Line />
-        <S.ButtonWrapper>
-          <S.Button />
-          <S.Button />
-        </S.ButtonWrapper>
-      </S.ContentWrapper>
+      {Array.from({ length: 5 }).map((_, index) => (
+        <S.ContentWrapper key={index}>
+          <S.Status />
+          <S.SubTitle />
+          <S.Title />
+          <S.Line />
+          <S.ButtonWrapper>
+            <S.Button />
+            <S.Button />
+          </S.ButtonWrapper>
+        </S.ContentWrapper>
+      ))}
     </S.Container>
   );
 }
