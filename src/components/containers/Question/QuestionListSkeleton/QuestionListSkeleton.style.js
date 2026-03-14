@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { media } from "@/styles/media";
 
 const shimmer = keyframes`
   0% {
@@ -33,7 +34,7 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.colors.brown10};
 `;
 
-export const Count = styled(SkeletonItem)`
+export const CountSkeleton = styled(SkeletonItem)`
   width: 60%;
 `;
 
@@ -52,17 +53,54 @@ export const ContentWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.pt1};
 `;
 
-export const Status = styled(SkeletonItem)`
-  width: 30%;
+export const StatusSkeleton = styled(SkeletonItem)`
+  width: 25%;
 `;
 
-export const SubTitle = styled(SkeletonItem)`
+export const SubTitleSkeleton = styled(SkeletonItem)`
   width: 20%;
 `;
 
-export const Title = styled(SkeletonItem)`
+export const TitleSkeleton = styled(SkeletonItem)`
   width: 80%;
   margin-top: -29px;
+`;
+
+export const AnswerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+`;
+
+export const UserImgSkeleton = styled(SkeletonItem)`
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+
+  ${media.tablet`
+    width: 48px;
+    height: 48px;
+  `}
+`;
+
+export const AnswerWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+`;
+
+export const UserInfoSkeleton = styled(SkeletonItem)`
+  width: 30%;
+`;
+
+export const AnswerContent = styled(SkeletonItem)`
+  width: 100%;
+  height: 80px;
 `;
 
 export const Line = styled.div`
@@ -79,7 +117,7 @@ export const ButtonWrapper = styled.div`
   gap: 24px;
 `;
 
-export const Button = styled(SkeletonItem)`
+export const ButtonSkeleton = styled(SkeletonItem)`
   width: 150px;
   height: 50px;
 `;
