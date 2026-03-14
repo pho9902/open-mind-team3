@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { questionApi } from "@/apis/question";
 
 import { ThumbsDownIcon } from "@/assets/icons/ThumbsDownIcon";
@@ -14,11 +14,41 @@ export default function ReactionButtons({ question }) {
     return !!localStorage.getItem(id);
   });
 
+  /* 좋아요 무한클릭을 위한 state */
+  const [showEffect, setShowEffect] = useState(false);
+  const clickCount = useRef(0);
+  const timerRef = useRef(null);
+
+  const triggerEffect = () => {
+    setShowEffect(true);
+
+    setTimeout(() => {
+      setShowEffect(false);
+    }, 2000);
+  };
+
   /* 좋아요 무한클릭 */
   const handleLikeClick = async (e) => {
     e.preventDefault();
 
     setLikeCount((prev) => prev + 1);
+
+    clickCount.current += 1;
+
+    // 10회 클릭마다 effect 적용
+    if (clickCount.current >= 10) {
+      triggerEffect();
+      clickCount.current = 0;
+    }
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    timerRef.current = setTimeout(() => {
+      clickCount.current = 0;
+    }, 2000);
+
     // Todo: toast로 좋아요 성공/실패 표시
     try {
       await questionApi.createReaction(id, "like");
@@ -51,13 +81,22 @@ export default function ReactionButtons({ question }) {
 
   return (
     <S.Container>
-      <S.ReactionButton onClick={handleLikeClick}>
-        <ThumbsUpIcon size={24} />
-        <S.ReactionCount>
-          <span>좋아요</span>
-          <span>{likeCount}</span>
-        </S.ReactionCount>
-      </S.ReactionButton>
+      <S.LikeWrapper>
+        {showEffect && (
+          <S.ThumbsUpEffect>
+            <ThumbsUpIcon size={20} color="#ffffff" />
+            <span>+10</span>
+          </S.ThumbsUpEffect>
+        )}
+        <S.ReactionButton onClick={handleLikeClick}>
+          <ThumbsUpIcon size={24} />
+          <S.ReactionCount>
+            <span>좋아요</span>
+            <span>{likeCount >= 999 ? "999+" : likeCount}</span>
+          </S.ReactionCount>
+        </S.ReactionButton>
+      </S.LikeWrapper>
+
       <S.ReactionButton
         $variant="dislike"
         $isDislikeClicked={isDislikeClicked}
@@ -66,7 +105,7 @@ export default function ReactionButtons({ question }) {
         <ThumbsDownIcon size={24} />
         <S.ReactionCount>
           <span>싫어요</span>
-          <span>{dislikeCount}</span>
+          <span>{dislikeCount >= 999 ? "999+" : dislikeCount}</span>
         </S.ReactionCount>
       </S.ReactionButton>
     </S.Container>

@@ -9,6 +9,44 @@ export const Container = styled.div`
   gap: 24px;
 `;
 
+export const LikeWrapper = styled.div`
+  position: relative;
+`;
+
+export const ThumbsUpEffect = styled.div`
+  height: 32px;
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  animation: thumbsUpEffect 2s ease-out forwards;
+  background-color: ${({ theme }) => theme.colors.blue};
+  box-shadow: ${({ theme }) => theme.shadows.pt1};
+  border-radius: 16px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  ${({ theme }) => theme.typography.caption1Medium};
+  color: ${({ theme }) => theme.colors.gray10};
+
+  @keyframes thumbsUpEffect {
+    0% {
+      transform: translate(-50%, 10px) translateY(0) scale(1);
+      opacity: 1;
+    }
+    70% {
+      transform: translate(-50%, -40px) scale(1.5);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -80px) scale(2);
+      opacity: 0;
+    }
+  }
+`;
+
 export const ReactionButton = styled(BasicButton)`
   padding: 8px 16px;
   border: 1px solid ${({ theme }) => theme.colors.gray50};
@@ -37,6 +75,11 @@ export const ReactionButton = styled(BasicButton)`
         border: 1px solid ${theme.colors.red};
         background-color: ${theme.colors.red};
       `}
+  }
+
+  &:active {
+    transform: translateY(2px);
+    box-shadow: ${({ theme }) => theme.shadows.pt1};
   }
 `;
 
