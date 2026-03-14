@@ -34,7 +34,7 @@ export default function ShareButtons({ $isScroll }) {
   const shareToKakao = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
-      console.log("kakao SDK 존재")
+
       if (!kakao.isInitialized()) {
         kakao.init(import.meta.env.VITE_KAKAO_KEY);
       }
@@ -42,10 +42,9 @@ export default function ShareButtons({ $isScroll }) {
       kakao.Share.sendDefault({
         objectType: "feed",
         content: {
-          title: "OpenMind",  // Todo: 피드 대상자의 이름으로 변경하는 게 맞을 것 같음
-          description: "익명으로 질문하고 답변하는 커뮤니티",  // Todo: 피드 대상자의 이름으로 변경하는 게 맞을 것 같음
-          imageUrl:
-            "https://t1.daumcdn.net/kakaocotton/resources/store/img/default_share_img.png",  // Todo: 공유할 이미지 URL로 변경하기
+          title: "OpenMind",
+          description: "익명으로 질문하고 답변하는 커뮤니티",
+          imageUrl: "https://open-mind-team3.vercel.app/thumbnail.png",
           link: {
             mobileWebUrl: currentUrl,
             webUrl: currentUrl,
@@ -62,7 +61,7 @@ export default function ShareButtons({ $isScroll }) {
         ],
       });
     }
-  }
+  };
 
   return (
     <S.ShareListWrapper $isScroll={$isScroll}>
