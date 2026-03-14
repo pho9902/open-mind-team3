@@ -7,7 +7,7 @@ import {
 
 import * as S from "@/components/containers/Question/FeedHeader/ShareButtons/ShareButtons.style";
 
-export default function ShareButtons({ $isScroll }) {
+export default function ShareButtons({ subjectData, $isScroll }) {
   const currentUrl = window.location.href;
 
   const handleCopyLink = async () => {
@@ -23,7 +23,7 @@ export default function ShareButtons({ $isScroll }) {
   // Todo: 배포하고 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
   // Todo: meta 태그에 og:image, og:title, og:description 추가하기
   const shareToFacebook = () => {
-    const sharedLink = encodeURIComponent(window.location.href);
+    const sharedLink = encodeURIComponent(currentUrl);
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${sharedLink}`,
       "facebook-share-dialog",
@@ -31,6 +31,7 @@ export default function ShareButtons({ $isScroll }) {
     );
   };
 
+  const TEMPLATE_ID = 130655;
   const shareToKakao = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -39,26 +40,13 @@ export default function ShareButtons({ $isScroll }) {
         kakao.init(import.meta.env.VITE_KAKAO_KEY);
       }
 
-      kakao.Share.sendDefault({
-        objectType: "feed",
-        content: {
-          title: "OpenMind",
-          description: "익명으로 질문하고 답변하는 커뮤니티",
-          imageUrl: "https://open-mind-team3.vercel.app/thumbnail.png",
-          link: {
-            mobileWebUrl: currentUrl,
-            webUrl: currentUrl,
-          },
+      kakao.Share.sendCustom({
+        templateId: TEMPLATE_ID,
+        templateArgs: {
+          path: currentUrl,
+          name: subjectData?.name || "",
+          like: subjectData?.like || 0,
         },
-        buttons: [
-          {
-            title: "질문 보러가기",
-            link: {
-              mobileWebUrl: currentUrl,
-              webUrl: currentUrl,
-            },
-          },
-        ],
       });
     }
   };
