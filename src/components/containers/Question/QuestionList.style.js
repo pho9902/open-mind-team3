@@ -66,7 +66,7 @@ export const FloatingGroup = styled.div`
 export const FloatingButtonWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   cursor: pointer;
 
   & span {
@@ -86,7 +86,7 @@ export const FloatingButtonWrapper = styled.div`
   }
 
   &:active {
-    transform: translateY(2px);
+    transform: scale(0.95);
   }
 `;
 
