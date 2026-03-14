@@ -53,7 +53,7 @@ export default function ListMain() {
 
   useEffect(() => {
     fetchSubject();
-  }, [fetchSubject]);
+  }, [fetchSubject, currentPage]);
 
   const handleSortClick = (value) => {
     if (sortBy !== value) {
@@ -111,7 +111,7 @@ export default function ListMain() {
       {isDesktopMode ? (
         <Pagination totalPage={totalPage} />
       ) : (
-        subjects.length < totalCount && (
+        displaySubjects.length < totalCount && (
           <InfiniteScrollObserver onIntersect={loadMore} />
         )
       )}
