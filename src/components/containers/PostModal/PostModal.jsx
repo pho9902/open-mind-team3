@@ -61,7 +61,7 @@ export default function PostModal({
             src={subjectData?.imageSource || placeholderImage}
             alt="질문자 이미지"
           />
-          <S.ProfileName>{subjectData?.name || "프로필이름"}</S.ProfileName>
+          <S.ProfileName>{subjectData?.name || "사용자"}</S.ProfileName>
         </S.ProfileWrapper>
 
         <S.TextAreaContent
