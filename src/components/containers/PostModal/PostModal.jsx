@@ -5,13 +5,19 @@ import { openToast } from "@/utils/toast";
 
 import { CloseIcon } from "@/assets/icons/CloseIcon";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
+import placeholderImage from "@/assets/img/user-placeholderImage.svg";
 
 import * as S from "@/components/containers/PostModal/PostModal.style";
 import Modal from "@/components/common/Modal/index";
 
 const MAX_LENGTH = 30;
 
-export default function PostModal({ subjectId, onClose, onSuccess }) {
+export default function PostModal({
+  subjectId,
+  subjectData,
+  onClose,
+  onSuccess,
+}) {
   const [questionContent, setQuestionContent] = useState("");
 
   const handleSubmit = async (e) => {
@@ -51,12 +57,11 @@ export default function PostModal({ subjectId, onClose, onSuccess }) {
 
         <S.ProfileWrapper>
           <span>To.</span>
-          {/* Todo: api에서 질문 대상자 정보 받아오기 */}
           <S.ProfileImage
-            src="https://picsum.photos/600/600"
+            src={subjectData?.imageSource || placeholderImage}
             alt="질문자 이미지"
           />
-          <S.ProfileName>프로필이름</S.ProfileName>
+          <S.ProfileName>{subjectData?.name || "프로필이름"}</S.ProfileName>
         </S.ProfileWrapper>
 
         <S.TextAreaContent

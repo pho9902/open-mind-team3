@@ -10,7 +10,7 @@ import SkeletonQuestion from "@/components/containers/Question/SkeletonQuestion/
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
-export default function QuestionList({ subjectId, isAnswer }) {
+export default function QuestionList({ subjectData, subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,6 @@ export default function QuestionList({ subjectId, isAnswer }) {
 
   return (
     <>
-      <SkeletonQuestion />
       {isAnswer && (
         <S.ButtonWrapper>
           <S.DeleteFeedButton
@@ -54,7 +53,11 @@ export default function QuestionList({ subjectId, isAnswer }) {
       )}
       <S.QuestionListWrapper>
         <QuestionCount questions={questions} />
-        <QuestionItems questions={questions} isAnswer={isAnswer} />
+        <QuestionItems
+          questions={questions}
+          isAnswer={isAnswer}
+          subjectData={subjectData}
+        />
       </S.QuestionListWrapper>
       <S.QuestionPostButton onClick={() => setIsOpen(true)}>
         <MessagesIcon size={24} />
@@ -64,6 +67,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
       {isOpen && (
         <PostModal
           subjectId={subjectId}
+          subjectData={subjectData}
           onClose={() => setIsOpen(false)}
           onSuccess={fetchQuestions}
         />
