@@ -1,25 +1,26 @@
 import * as S from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion.style";
+import { Skeleton } from "@/components/common/Skeleton/Skeleton.style";
 
 export default function SkeletonQuestion() {
   return (
     <S.Container>
-      <S.CountSkeleton />
+      <Skeleton width="60%" />
       {Array.from({ length: 3 }).map((_, index) => (
         <S.ContentWrapper key={index}>
-          <S.StatusSkeleton />
-          <S.SubTitleSkeleton />
-          <S.TitleSkeleton />
+          <Skeleton width="25%" />
+          <Skeleton width="20%" />
+          <Skeleton width="80%" className="titleSkeleton" />
           <S.AnswerContainer>
-            <S.UserImgSkeleton />
+            <Skeleton borderRadius="9999px" className="userImgSkeleton" />
             <S.AnswerWrapper>
-              <S.UserInfoSkeleton />
-              <S.AnswerContent />
+              <Skeleton width="30%" />
+              <Skeleton width="100%" height="80px" />
             </S.AnswerWrapper>
           </S.AnswerContainer>
           <S.Line />
           <S.ButtonWrapper>
-            <S.ButtonSkeleton />
-            <S.ButtonSkeleton />
+            <Skeleton width="150px" height="50px" />
+            <Skeleton width="150px" height="50px" />
           </S.ButtonWrapper>
         </S.ContentWrapper>
       ))}
