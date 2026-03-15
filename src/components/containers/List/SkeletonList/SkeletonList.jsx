@@ -7,11 +7,11 @@ export default function SkeletonList() {
     <S.Container>
       {Array.from({ length: 8 }).map((_, index) => (
         <S.CardWrapper key={index}>
-          <Skeleton borderRadius="9999px" className="userImgSkeleton" />
-          <Skeleton height="25px" />
+          <Skeleton $borderRadius="9999px" className="userImgSkeleton" />
+          <Skeleton $height="25px" />
           <S.CardFooter>
-            <Skeleton width="60%" height="25px" />
-            <Skeleton width="30%" height="25px" />
+            <Skeleton $width="60%" $height="25px" />
+            <Skeleton $width="30%" $height="25px" />
           </S.CardFooter>
         </S.CardWrapper>
       ))}
