@@ -47,7 +47,7 @@ const CardFace = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; 
+  backface-visibility: hidden;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -74,7 +74,7 @@ export const CardBack = styled(CardFace)`
   
 `;
 
-export const QuestionContent = styled.p`
+export const QuestionContent = styled.div`
   margin: 0;
   padding: 0 10px;
   word-break: break-all;
@@ -82,6 +82,15 @@ export const QuestionContent = styled.p`
   color: ${({ theme }) => theme.colors.gray50};
   flex: 1;
   display: flex;
+  flex-direction: column;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--grayscale-60);
+    text-align: left;
+  }
 `;
 
 export const SubjectName = styled.div`
@@ -119,4 +128,28 @@ export const QuestionLabel = styled.div`
 export const QuestionCount = styled.div`
   ${({ theme }) => theme.typography.body2};
   color: ${({ theme }) => theme.colors.gray40};
+`;
+
+export const QuestionList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const QuestionItem = styled.li`
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--grayscale-50);
+  text-align: left;
+  word-break: break-all;
+  
+  &::before {
+    content: "Q. ";
+    font-weight: bold;
+    color: var(--brown-40);
+  }
 `;
