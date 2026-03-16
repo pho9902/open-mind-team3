@@ -87,10 +87,6 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
     }
   };
 
-  if (isLoading) {
-    return <SkeletonQuestion />;
-  }
-
   return (
     <>
       {isAnswer && (
@@ -101,25 +97,29 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
         </S.ButtonWrapper>
       )}
 
-      <S.QuestionListWrapper>
-        <QuestionCount totalCount={totalCount} />
-        <QuestionItems
-          questions={questions}
-          isAnswer={isAnswer}
-          fetchQuestions={() => fetchQuestions(true)}
-          subjectData={subjectData}
-        />
+      {isLoading && questions.length === 0 ? (
+        <SkeletonQuestion />
+      ) : (
+        <S.QuestionListWrapper>
+          <QuestionCount totalCount={totalCount} />
+          <QuestionItems
+            questions={questions}
+            isAnswer={isAnswer}
+            fetchQuestions={() => fetchQuestions(true)}
+            subjectData={subjectData}
+          />
 
-        {!isLoading && hasNext && questions.length > 0 && (
-          <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
-        )}
+          {!isLoading && hasNext && questions.length > 0 && (
+            <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
+          )}
 
-        {isLoading && questions.length > 0 && (
-          <S.SpinnerWrapper>
-            <LoadingSpinner size={50} />
-          </S.SpinnerWrapper>
-        )}
-      </S.QuestionListWrapper>
+          {isLoading && questions.length > 0 && (
+            <S.SpinnerWrapper>
+              <LoadingSpinner size={50} />
+            </S.SpinnerWrapper>
+          )}
+        </S.QuestionListWrapper>
+      )}
 
       <S.FloatingGroup>
         <S.FloatingButtonWrapper>

@@ -4,8 +4,8 @@ import { Skeleton } from "@/components/common/Skeleton/Skeleton.style";
 export default function SkeletonQuestion() {
   return (
     <S.Container>
-      <Skeleton width="60%" />
-      {Array.from({ length: 3 }).map((_, index) => (
+      <Skeleton $width="60%" />
+      {Array.from({ length: 5 }).map((_, index) => (
         <S.ContentWrapper key={index}>
           <Skeleton $width="25%" />
           <Skeleton $width="20%" />
