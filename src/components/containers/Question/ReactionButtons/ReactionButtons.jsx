@@ -12,7 +12,10 @@ export default function ReactionButtons({ question }) {
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
   const [isDislikeClicked, setIsDislikeClicked] = useState(() => {
-    return !!localStorage.getItem(id);
+    const stored = localStorage.getItem("dislikedQuestions");
+    if (!stored) return false;
+
+    return JSON.parse(stored).includes(id);
   });
   const [showEffect, setShowEffect] = useState([]);
 
@@ -28,14 +31,12 @@ export default function ReactionButtons({ question }) {
     }, 2000);
   };
 
-  /* 좋아요 무한클릭 */
   const handleLikeClick = async (e) => {
     e.preventDefault();
 
     clickCount.current += 1;
     setLikeCount((prev) => prev + 1);
 
-    // 10회 클릭마다 effect 적용
     if (clickCount.current >= 10) {
       triggerEffect();
       clickCount.current = 0;
@@ -59,7 +60,6 @@ export default function ReactionButtons({ question }) {
     }
   };
 
-  /* 싫어요 클릭 */
   const handleDislikeClick = async (e) => {
     e.preventDefault();
 
@@ -73,14 +73,21 @@ export default function ReactionButtons({ question }) {
 
     try {
       await questionApi.createReaction(id, "dislike");
-      localStorage.setItem(id, "true");
+
+      const stored = localStorage.getItem("dislikedQuestions");
+      const dislikedList = stored ? JSON.parse(stored) : [];
+
+      dislikedList.push(id);
+
+      localStorage.setItem("dislikedQuestions", JSON.stringify(dislikedList));
+
       openToast.success("싫어요가 등록되었습니다.");
     } catch (error) {
       console.error("싫어요 처리 중 오류 발생:", error);
+
       setDislikeCount((prev) => prev - 1);
       setIsDislikeClicked(false);
-      localStorage.removeItem(id);
-      openToast.error("싫어요 등록에 실패했습니다. 다시 시도해주세요.");
+      openToast.error("싫어요 등록에 실패했습니다.");
     }
   };
 
