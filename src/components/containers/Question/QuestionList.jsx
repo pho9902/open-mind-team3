@@ -8,10 +8,11 @@ import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
+import SkeletonQuestion from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
-export default function QuestionList({ subjectId, isAnswer }) {
+export default function QuestionList({ subjectData, subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +37,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
   }, [fetchQuestions]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <SkeletonQuestion />;
   }
 
   return (
@@ -58,6 +59,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
           questions={questions}
           isAnswer={isAnswer}
           fetchQuestions={fetchQuestions}
+          subjectData={subjectData}
         />
       </S.QuestionListWrapper>
 
@@ -79,6 +81,7 @@ export default function QuestionList({ subjectId, isAnswer }) {
       {isOpen && (
         <PostModal
           subjectId={subjectId}
+          subjectData={subjectData}
           onClose={() => setIsOpen(false)}
           onSuccess={fetchQuestions}
         />

@@ -39,7 +39,11 @@ export default function FeedPage() {
     <>
       <FeedHeader subjectData={subjectData} />
       <S.Container>
-        <QuestionList subjectId={subjectId} isAnswer={isAnswer} />
+        <QuestionList
+          subjectData={subjectData}
+          subjectId={subjectId}
+          isAnswer={isAnswer}
+        />
       </S.Container>
     </>
   );
