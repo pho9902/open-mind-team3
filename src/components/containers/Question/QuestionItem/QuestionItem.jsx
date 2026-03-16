@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { formatDate } from "@/utils/formatDate";
 
 import AnswerItem from "@/components/containers/Question/AnswerItem/AnswerItem";
@@ -13,13 +14,22 @@ export default function QuestionItem({
   isAnswer,
   fetchQuestions,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   return (
     <S.Container key={question.id}>
       <S.ItemHeader>
         <S.AnswerStatus $isAnswer={!!answer}>
           {!answer ? "미답변" : answer.isRejected ? "답변 거절" : "답변 완료"}
         </S.AnswerStatus>
-        {isAnswer && <Kebab answer={answer} fetchQuestions={fetchQuestions} />}
+        {isAnswer && (
+          <Kebab
+            question={question}
+            answer={answer}
+            fetchQuestions={fetchQuestions}
+            setIsEditing={setIsEditing}
+          />
+        )}
       </S.ItemHeader>
 
       <S.QuestionWrapper>
@@ -29,10 +39,25 @@ export default function QuestionItem({
         </S.ContentCategory>
         <S.Content>{question.content}</S.Content>
       </S.QuestionWrapper>
-      {answer && <AnswerItem answer={answer} />}
+
+      {answer &&
+        (isEditing ? (
+          <AnswerInput
+            fetchQuestions={fetchQuestions}
+            question={question}
+            initialContent={answer.content}
+            isEdit={true}
+            setIsEditing={setIsEditing}
+            answerId={answer.id}
+          />
+        ) : (
+          <AnswerItem answer={answer} />
+        ))}
+
       {isAnswer && !answer && (
         <AnswerInput fetchQuestions={fetchQuestions} question={question} />
       )}
+
       <S.Line />
       <ReactionButtons question={question} />
     </S.Container>

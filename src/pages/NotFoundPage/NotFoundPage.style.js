@@ -40,6 +40,7 @@ export const Title = styled.h1`
 `;
 
 export const Description = styled.p`
+  white-space: pre-wrap;
   ${({ theme }) => theme.typography.caption1Regular};
   color: ${({ theme }) => theme.colors.gray50};
   text-align: center;

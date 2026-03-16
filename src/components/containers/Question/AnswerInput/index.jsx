@@ -2,6 +2,7 @@ import { useState } from "react";
 import * as S from "../AnswerItem/AnswerItem.style";
 import { TextArea } from "@/components/common/Input/Input.style";
 import { questionApi } from "@/apis/question";
+import { answerApi } from "@/apis/answer";
 import { openToast } from "@/utils/toast";
 
 export default function AnswerInput({
@@ -9,23 +10,32 @@ export default function AnswerInput({
   userName = "아초는고양이",
   fetchQuestions,
   question,
+  initialContent = "",
+  isEdit = false,
+  setIsEditing,
+  answerId,
 }) {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState(initialContent);
 
   const handleTextChange = (e) => setContent(e.target.value);
   const isButtonActive = content.trim().length > 0;
 
   const handleSubmitButton = async () => {
     if (!isButtonActive) return;
-    console.log(question);
 
     try {
-      await questionApi.createAnswer(question.id, content);
-      setContent("");
-      openToast.success("답변을 등록했습니다.");
+      if (isEdit) {
+        await answerApi.editAnswer(answerId, content);
+        openToast.success("답변을 수정했습니다.");
+        setIsEditing(false);
+      } else {
+        await questionApi.createAnswer(question.id, content);
+        openToast.success("답변을 등록했습니다.");
+        setContent("");
+      }
       fetchQuestions();
     } catch (error) {
-      openToast.error("답변 등록에 실패했습니다. 다시 시도해주세요");
+      openToast.error(`${isEdit ? "수정" : "등록"}에 실패했습니다.`);
     }
   };
 
@@ -40,13 +50,14 @@ export default function AnswerInput({
             placeholder="답변을 입력해주세요"
             value={content}
             onChange={handleTextChange}
+            autoFocus={isEdit}
           />
           <S.SubmitButton
             $active={isButtonActive}
             disabled={!isButtonActive}
             onClick={() => handleSubmitButton()}
           >
-            답변 완료
+            {isEdit ? "수정 완료" : "답변 완료"}
           </S.SubmitButton>
         </S.AnswerText>
       </S.AnswerContent>

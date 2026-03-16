@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { subjectApi } from "@/apis/subject";
 import { validateName } from "@/utils/validation";
+import { openToast } from "@/utils/toast";
+import { STORAGE } from "@/constants";
 
 export const useCreateFeed = () => {
   const [input, setInput] = useState("");
@@ -30,6 +32,8 @@ export const useCreateFeed = () => {
 
       const data = await subjectApi.createFeed(inputName);
       localStorage.setItem("feedId", data.id);
+      openToast("새 피드가 생성되었어요.");
+      localStorage.setItem(STORAGE.FEED_ID, data.id);
 
       navigate(`/post/${data.id}/answer`);
     } catch (error) {
