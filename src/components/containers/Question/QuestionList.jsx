@@ -6,40 +6,63 @@ import { openToast } from "@/utils/toast";
 import { MenuIcon } from "@/assets/icons/MenuIcon";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 import { STORAGE } from "@/constants";
+import { LoadingSpinner } from "@/assets/icons/LoadingSpinnerIcon";
 
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
 import Confirm from "@/components/common/Confirm";
+import InfiniteScrollObserver from "@/components/common/InfiniteScroll/InfiniteScrollObserver";
 import SkeletonQuestion from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
+const LIMIT = 8;
+
 export default function QuestionList({ subjectData, subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
+  const [totalCount, setTotalCount] = useState(0); // 질문 총 개수
+
   const navigate = useNavigate();
 
-  const fetchQuestions = useCallback(async () => {
-    if (!subjectId) return;
+  const fetchQuestions = useCallback(
+    async (isInitial = false) => {
+      if (isLoading || (!isInitial && !hasNext)) return;
 
-    setIsLoading(true);
-    try {
-      const data = await subjectApi.getQuestions(subjectId);
-      setQuestions(data.results);
-    } catch (error) {
-      openToast.error("질문 목록을 가져오는데 실패했습니다.");
-      console.error("Error fetching questions:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [subjectId]);
+      setIsLoading(true);
+      try {
+        const nextOffset = isInitial ? 0 : offset;
+
+        const response = await subjectApi.getQuestions(
+          subjectId,
+          LIMIT,
+          nextOffset,
+        );
+        console.log(response.next);
+        const { results, next, count } = response;
+
+        setQuestions((prev) => (isInitial ? results : [...prev, ...results]));
+        setTotalCount(count);
+        setOffset(nextOffset + LIMIT);
+        setHasNext(!!next);
+      } catch (error) {
+        openToast.error("질문 목록을 가져오는데 실패했습니다.");
+        console.error("Error fetching questions:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [subjectId, offset, isLoading, hasNext],
+  );
 
   useEffect(() => {
-    fetchQuestions();
-  }, [fetchQuestions]);
+    fetchQuestions(true);
+  }, [subjectId]);
 
   const handleDeleteFeed = async () => {
     try {
@@ -70,13 +93,23 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
       )}
 
       <S.QuestionListWrapper>
-        <QuestionCount questions={questions} />
+        <QuestionCount totalCount={totalCount} />
         <QuestionItems
           questions={questions}
           isAnswer={isAnswer}
           fetchQuestions={fetchQuestions}
           subjectData={subjectData}
         />
+
+        {questions.length > 0 && !isLoading && hasNext && (
+          <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
+        )}
+
+        {isLoading && (
+          <S.SpinnerWrapper>
+            <LoadingSpinner size={40} />
+          </S.SpinnerWrapper>
+        )}
       </S.QuestionListWrapper>
 
       <S.FloatingGroup>

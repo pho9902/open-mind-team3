@@ -111,3 +111,11 @@ export const QuestionPostButton = styled(FloatingButton)`
 
   box-shadow: ${({ theme }) => theme.shadows.pt3};
 `;
+
+export const SpinnerWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+  width: 100%;
+`;
