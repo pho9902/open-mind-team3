@@ -19,6 +19,7 @@ export default function ListMain() {
   const [totalCount, setTotalCount] = useState(0);
   const [isFirstLoading, setIsFirstLoading] = useState(false);
   const [showSpinner, setShowSpinner] = useState(false);
+  const [loadedPage, setLoadedPage] = useState(1);
 
   const { isPC, isLargeTablet } = useDeviceType();
   const isDesktopMode = isPC || isLargeTablet;
@@ -85,15 +86,13 @@ export default function ListMain() {
 
   const displaySubjects = isDesktopMode
     ? subjects?.slice((currentPage - 1) * LIMIT, currentPage * LIMIT)
-    : subjects?.slice(0, currentPage * LIMIT);
+    : subjects?.slice(0, loadedPage * LIMIT);
 
   const loadMore = useCallback(() => {
-    if (currentPage < totalPage) {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set("page", (currentPage + 1).toString());
-      setSearchParams(newParams);
+    if (loadedPage < totalPage) {
+      setLoadedPage((prev) => prev + 1);
     }
-  }, [currentPage, totalPage, searchParams, setSearchParams]);
+  }, [loadedPage, totalPage]);
 
   return (
     <S.MainSection>
