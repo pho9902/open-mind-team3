@@ -6,6 +6,7 @@ import { ArrowUpIcon } from "@/assets/icons/ArrowUpIcon";
 import { ArrowDownIcon } from "@/assets/icons/ArrowDownIcon";
 import { subjectApi } from "@/apis/subject";
 import { LoadingSpinner } from "@/assets/icons/LoadingSpinnerIcon";
+import { openToast } from "@/utils/toast";
 
 import * as S from "@/components/containers/List/ListMain/ListMain.style";
 import ListCard from "@/components/containers/List/ListCard/ListCard";
@@ -52,12 +53,14 @@ export default function ListMain() {
     }, 1000);
 
     try {
+      // throw new Error("test");
       const response = await subjectApi.getFeedList(1000, 0);
       const { count, results } = response;
       setTotalCount(count);
       setSubjects(sortedSubjects(results));
     } catch (error) {
-      console.error("list 화면 로딩 실패", e);
+      console.error("ListMain 로딩 실패", error);
+      openToast("데이터를 불러오는 데 실패했습니다");
     } finally {
       clearTimeout(timer);
       setIsFirstLoading(false);

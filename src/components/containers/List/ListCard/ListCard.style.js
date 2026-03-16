@@ -23,9 +23,9 @@ export const CardContainer = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.pt1};
 
   ${media.pc`
-    
-    width: 220px;
-    `}
+  
+  width: 220px;
+  `}
 `;
 
 export const CardInner = styled.div`
@@ -40,7 +40,7 @@ export const CardInner = styled.div`
   ${media.pc`
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform: ${({ $isFront }) => ($isFront ? "rotateY(0deg)" : "rotateY(180deg)")};
-  `}
+    `}
 `;
 
 const CardFace = styled.div`
@@ -60,19 +60,19 @@ export const CardFront = styled(CardFace)`
 `;
 
 export const CardBack = styled(CardFace)`
-  transform: rotateY(180deg);
-  background: ${({ theme }) => theme.colors.gray20}
-  text-align: center;
-  padding:0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;  
-  justify-content: flex-start;   
-  text-align: center;
-  gap: 20px;               
-
-  
-`;
+    transform: rotateY(180deg);
+    background: ${({ theme }) => theme.colors.gray20}
+    text-align: center;
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  
+    justify-content: flex-start;   
+    text-align: center;
+    gap: 20px;               
+    
+    
+    `;
 
 export const QuestionContent = styled.div`
   margin: 0;
@@ -83,6 +83,7 @@ export const QuestionContent = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   h3 {
     font-size: 16px;
@@ -91,6 +92,23 @@ export const QuestionContent = styled.div`
     color: var(--grayscale-60);
     text-align: left;
   }
+  ${({ $isLoading }) =>
+    $isLoading &&
+    `
+      justify-content: center;
+      align-items: center;
+      `}
+`;
+
+export const SpinnerWrapper = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SubjectName = styled.div`
@@ -146,7 +164,7 @@ export const QuestionItem = styled.li`
   color: var(--grayscale-50);
   text-align: left;
   word-break: break-all;
-  
+
   &::before {
     content: "Q. ";
     font-weight: bold;

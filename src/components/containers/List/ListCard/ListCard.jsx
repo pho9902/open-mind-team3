@@ -6,6 +6,7 @@ import { subjectApi } from "@/apis/subject";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
 import { LoadingSpinner } from "@/assets/icons/LoadingSpinnerIcon";
 import userPlaceholderImage from "@/assets/img/user-placeholderImage.svg";
+import { openToast } from "@/utils/toast";
 
 import * as S from "@/components/containers/List/ListCard/ListCard.style";
 
@@ -13,7 +14,7 @@ export default function ListCard({ subject }) {
   const { name, imageSource, questionCount, id } = subject;
   const [isFront, setIsFront] = useState(true);
   const [questionContent, setQuestionContent] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const handleMouseEnter = () => setIsFront(false);
   const handleMouseLeave = () => setIsFront(true);
@@ -25,10 +26,13 @@ export default function ListCard({ subject }) {
   const fetchQuestions = async () => {
     setIsLoading(true);
     try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // throw new Error("test");
       const response = await subjectApi.getQuestions(id, 2, 0);
       setQuestionContent(response.results || []);
     } catch (e) {
       console.error("질문 로드 실패", e);
+      openToast("질문을 불러오는 데 실패했습니다");
     } finally {
       setIsLoading(false);
     }
@@ -65,9 +69,10 @@ export default function ListCard({ subject }) {
         <S.CardBack>
           <S.QuestionContent>
             <h3>{name}님이 받은 질문</h3>
-
             {isLoading ? (
-              <LoadingSpinner />
+              <S.SpinnerWrapper>
+                <LoadingSpinner />
+              </S.SpinnerWrapper>
             ) : questionContent.length > 0 ? (
               <S.QuestionList>
                 {questionContent.map((q) => (
