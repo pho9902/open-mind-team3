@@ -36,31 +36,26 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
 
       setIsLoading(true);
       try {
-        const nextOffset = isInitial ? 0 : offsetRef.current;
+        const currentOffset = isInitial ? 0 : offsetRef.current;
 
         const response = await subjectApi.getQuestions(
           subjectId,
           LIMIT,
-          nextOffset,
+          currentOffset,
         );
         const { results, next, count } = response;
 
         setQuestions((prev) => {
-          // 1. 초기 로딩(isInitial)일 때는 그냥 새 데이터를 덮어씌웁니다.
           if (isInitial) return results;
 
-          // 2. 추가 로딩일 때는 기존 리스트(prev)에 없는 데이터만 골라냅니다.
-          const uniqueResults = results.filter(
-            (newQuestion) =>
-              !prev.some((oldQuestion) => oldQuestion.id === newQuestion.id),
+          const newItems = results.filter(
+            (item) => !prev.some((prevItem) => prevItem.id === item.id),
           );
-
-          // 3. 기존 데이터 + 중복되지 않은 새 데이터만 합칩니다.
-          return [...prev, ...uniqueResults];
+          return [...prev, ...newItems];
         });
         setTotalCount(count);
         setHasNext(!!next);
-        offsetRef.current = nextOffset + results.length;
+        offsetRef.current = currentOffset + results.length;
       } catch (error) {
         openToast.error("질문 목록을 가져오는데 실패했습니다.");
         console.error("Error fetching questions:", error);
@@ -111,17 +106,17 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
         <QuestionItems
           questions={questions}
           isAnswer={isAnswer}
-          fetchQuestions={fetchQuestions}
+          fetchQuestions={() => fetchQuestions(true)}
           subjectData={subjectData}
         />
 
-        {questions.length > 0 && !isLoading && hasNext && (
+        {!isLoading && hasNext && questions.length > 0 && (
           <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
         )}
 
-        {questions.length > 0 && isLoading && (
+        {isLoading && questions.length > 0 && (
           <S.SpinnerWrapper>
-            <LoadingSpinner size={40} />
+            <LoadingSpinner size={50} />
           </S.SpinnerWrapper>
         )}
       </S.QuestionListWrapper>
