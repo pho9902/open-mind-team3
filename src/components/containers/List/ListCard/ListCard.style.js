@@ -150,6 +150,5 @@ export const QuestionItem = styled.li`
   &::before {
     content: "Q. ";
     font-weight: bold;
-    color: var(--brown-40);
   }
 `;
