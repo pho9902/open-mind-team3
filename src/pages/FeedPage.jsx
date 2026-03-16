@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { subjectApi } from "@/apis/subject";
+import { openToast } from "@/utils/toast";
 import { STORAGE } from "@/constants/index";
 import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
 import QuestionList from "@/components/containers/Question/QuestionList";
@@ -20,9 +21,17 @@ export default function FeedPage() {
   const isMyFeed = String(myFeedId) === String(subjectId);
 
   useEffect(() => {
+    if (isAnswer && !isMyFeed) {
+      openToast.error("답변 페이지는 본인 피드에서만 접근 가능합니다.");
+      navigate(`/post/${subjectId}`, { replace: true });
+      return;
+    }
+
     if (isMyFeed && !isAnswer) {
       navigate(`/post/${subjectId}/answer`, { replace: true });
-    } else if (subpath && !isAnswer) {
+    }
+
+    if (subpath && !isAnswer) {
       navigate("/not-found", { replace: true });
     }
   }, [subjectId, subpath, navigate, isAnswer, isMyFeed]);
