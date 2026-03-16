@@ -34,9 +34,10 @@ const FeedHeader = ({ subjectData }) => {
         <S.ProfileContainer>
           <LogoImg width={170} />
           <FeedProfile subjectData={subjectData} />
-          <ShareButtons />
+          <ShareButtons subjectData={subjectData} />
         </S.ProfileContainer>
       </S.MainHeader>
+
       {/* 스크롤 헤더  */}
       {isHeaderVisible && (
         <S.ScrollContainer $visible={isHeaderVisible}>

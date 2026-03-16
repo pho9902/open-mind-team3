@@ -1,11 +1,16 @@
 import EmptyQuestion from "@/components/containers/Question/EmptyQuestion/EmptyQuestion";
 import QuestionItem from "@/components/containers/Question/QuestionItem/QuestionItem";
 
-export default function QuestionItems({ questions, isAnswer, fetchQuestions }) {
+export default function QuestionItems({
+  questions,
+  isAnswer,
+  fetchQuestions,
+  subjectData,
+}) {
   return (
     <>
       {questions.length === 0 ? (
-        <EmptyQuestion />
+        <EmptyQuestion subjectData={subjectData} />
       ) : (
         questions.map((question) => (
           <QuestionItem
