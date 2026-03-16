@@ -1,7 +1,7 @@
 import Modal from "@/components/common/Modal";
 import * as S from "./Confirm.style";
 
-export default function Confirm({ header, description, onConfirm }) {
+export default function Confirm({ header, description, onConfirm, setIsOpen }) {
   const handleConfirm = () => {
     if (onConfirm) onConfirm();
     setIsOpen(false);

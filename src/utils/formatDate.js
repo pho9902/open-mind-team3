@@ -1,6 +1,6 @@
 const startDay = (date) => {
   const d = new Date(date);
-  return (d.getFullYear(), d.getMonth(), d.getDate());
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate());
 };
 
 export const formatDate = {

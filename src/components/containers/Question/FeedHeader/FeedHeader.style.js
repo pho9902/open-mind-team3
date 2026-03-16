@@ -60,7 +60,6 @@ export const ScrollContainer = styled.div`
 `;
 
 export const PrevButton = styled.button`
-  flex: 0.7;
   & svg {
     padding: 6px;
     &:hover {
@@ -71,8 +70,11 @@ export const PrevButton = styled.button`
 `;
 
 export const ScrollFeedProfile = styled.div`
-  flex: 0.75;
   display: flex;
   align-items: center;
   cursor: pointer;
+
+  ${media.tablet`
+  margin-left: 100px;
+  `};
 `;
