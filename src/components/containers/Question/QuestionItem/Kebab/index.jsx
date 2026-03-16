@@ -12,7 +12,12 @@ import * as S from "./Kebab.style";
 import { openToast } from "@/utils/toast";
 import Confirm from "@/components/common/Confirm";
 
-export default function Kebab({ question, answer, fetchQuestions }) {
+export default function Kebab({
+  question,
+  answer,
+  fetchQuestions,
+  setIsEditing,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [rejectConfirmOpen, setRejectConfirmOpen] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
@@ -83,17 +88,17 @@ export default function Kebab({ question, answer, fetchQuestions }) {
 
       {isOpen && (
         <S.MenuWrapper>
-          <S.MenuItem
-            onClick={
-              () =>
-                console.log(
-                  "수정",
-                ) /* Todo: question id 따서 AnswerItem -> AnswerInput 으로 바꿔주기 */
-            }
-          >
-            <EditIcon size={14} />
-            수정하기
-          </S.MenuItem>
+          {answer && !answer.isRejected && (
+            <S.MenuItem
+              onClick={() => {
+                setIsEditing(true);
+                setIsOpen(false);
+              }}
+            >
+              <EditIcon size={14} />
+              수정하기
+            </S.MenuItem>
+          )}
 
           <S.MenuItem
             className="delete"
