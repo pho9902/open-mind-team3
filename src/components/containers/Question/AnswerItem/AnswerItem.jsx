@@ -1,21 +1,23 @@
 import { formatDate } from "@/utils/formatDate";
 
+import placeholderImage from "@/assets/img/user-placeholderImage.svg";
+
 import * as S from "@/components/containers/Question/AnswerItem/AnswerItem.style";
 
-export default function AnswerItem({ answer }) {
+export default function AnswerItem({ answer, subjectData }) {
   const { content, isRejected } = answer;
 
   return (
     <S.Container>
-      {/* Todo: 임시 이미지 링크입니다. 나중에 연결되면 이미지 src 변경 필요 */}
       <S.AnswerImage
-        src="https://picsum.photos/600/600"
+        src={subjectData?.imageSource || placeholderImage}
         alt="답변자프로필이미지"
       />
       <S.AnswerContent>
         <S.AnswerProfile>
-          {/* Todo: 나중에 실제 답변자 이름으로 변경 필요 */}
-          <S.AnswerProfileName>답변자이름</S.AnswerProfileName>
+          <S.AnswerProfileName>
+            {subjectData?.name || "사용자"}
+          </S.AnswerProfileName>
           <S.AnswerProfileDate>
             {formatDate.relative(answer.createdAt)}
           </S.AnswerProfileDate>

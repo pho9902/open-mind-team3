@@ -19,6 +19,7 @@ export default function QuestionItems({
             answer={question.answer}
             isAnswer={isAnswer}
             fetchQuestions={fetchQuestions}
+            subjectData={subjectData}
           />
         ))
       )}

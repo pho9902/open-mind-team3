@@ -4,10 +4,11 @@ import { TextArea } from "@/components/common/Input/Input.style";
 import { questionApi } from "@/apis/question";
 import { answerApi } from "@/apis/answer";
 import { openToast } from "@/utils/toast";
+import placeholderImage from "@/assets/img/user-placeholderImage.svg";
 
 export default function AnswerInput({
-  userProfile = "https://picsum.photos/100/100",
-  userName = "아초는고양이",
+  userProfile = placeholderImage,
+  userName = "사용자",
   fetchQuestions,
   question,
   initialContent = "",

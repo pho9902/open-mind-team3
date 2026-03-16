@@ -13,6 +13,7 @@ export default function QuestionItem({
   answer,
   isAnswer,
   fetchQuestions,
+  subjectData,
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -43,6 +44,8 @@ export default function QuestionItem({
       {answer &&
         (isEditing ? (
           <AnswerInput
+            userProfile={subjectData?.imageSource}
+            userName={subjectData?.name}
             fetchQuestions={fetchQuestions}
             question={question}
             initialContent={answer.content}
@@ -51,11 +54,16 @@ export default function QuestionItem({
             answerId={answer.id}
           />
         ) : (
-          <AnswerItem answer={answer} />
+          <AnswerItem answer={answer} subjectData={subjectData} />
         ))}
 
       {isAnswer && !answer && (
-        <AnswerInput fetchQuestions={fetchQuestions} question={question} />
+        <AnswerInput
+          userProfile={subjectData?.imageSource}
+          userName={subjectData?.name}
+          fetchQuestions={fetchQuestions}
+          question={question}
+        />
       )}
 
       <S.Line />
