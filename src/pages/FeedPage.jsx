@@ -23,7 +23,7 @@ export default function FeedPage() {
     if (isMyFeed && !isAnswer) {
       navigate(`/post/${subjectId}/answer`, { replace: true });
     } else if (subpath && !isAnswer) {
-      navigate("/err", { replace: true });
+      navigate("/not-found", { replace: true });
     }
   }, [subjectId, subpath, navigate, isAnswer, isMyFeed]);
 
