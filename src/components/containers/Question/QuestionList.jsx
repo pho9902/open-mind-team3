@@ -1,13 +1,16 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { subjectApi } from "@/apis/subject";
+import { openToast } from "@/utils/toast";
 import { MenuIcon } from "@/assets/icons/MenuIcon";
 import { MessagesIcon } from "@/assets/icons/MessagesIcon";
+import { STORAGE } from "@/constants";
 
 import QuestionCount from "@/components/containers/Question/QuestionCount/QuestionCount";
 import QuestionItems from "@/components/containers/Question/QuestionItems/QuestionItems";
 import PostModal from "@/components/containers/PostModal/PostModal";
+import Confirm from "@/components/common/Confirm";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
@@ -15,6 +18,8 @@ export default function QuestionList({ subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+  const navigate = useNavigate();
 
   const fetchQuestions = useCallback(async () => {
     if (!subjectId) return;
@@ -35,6 +40,20 @@ export default function QuestionList({ subjectId, isAnswer }) {
     fetchQuestions();
   }, [fetchQuestions]);
 
+  const handleDeleteFeed = async () => {
+    try {
+      await subjectApi.deleteFeed(subjectId);
+
+      openToast.success(
+        "피드가 삭제되었습니다, 잠시 후 메인화면으로 이동합니다",
+      );
+      localStorage.removeItem(STORAGE.FEED_ID);
+      navigate("/");
+    } catch (error) {
+      openToast.error("피드 삭제에 실패했습니다.");
+    }
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -43,15 +62,12 @@ export default function QuestionList({ subjectId, isAnswer }) {
     <>
       {isAnswer && (
         <S.ButtonWrapper>
-          <S.DeleteFeedButton
-            onClick={
-              () => console.log("피드 삭제") /* Confrim 띄우고 기능구현 */
-            }
-          >
+          <S.DeleteFeedButton onClick={() => setDeleteConfirmOpen(true)}>
             피드 삭제하기
           </S.DeleteFeedButton>
         </S.ButtonWrapper>
       )}
+
       <S.QuestionListWrapper>
         <QuestionCount questions={questions} />
         <QuestionItems
@@ -81,6 +97,15 @@ export default function QuestionList({ subjectId, isAnswer }) {
           subjectId={subjectId}
           onClose={() => setIsOpen(false)}
           onSuccess={fetchQuestions}
+        />
+      )}
+
+      {deleteConfirmOpen && (
+        <Confirm
+          header="피드를 삭제하시겠습니까?"
+          description="피드를 삭제하면 모든 질문과 답변 데이터가 사라집니다."
+          onConfirm={handleDeleteFeed}
+          setIsOpen={setDeleteConfirmOpen}
         />
       )}
     </>

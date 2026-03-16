@@ -1,7 +1,8 @@
+import { STORAGE } from "@/constants";
 import { Navigate, Outlet } from "react-router-dom";
 
 export const PublicRoute = () => {
-  const feedId = localStorage.getItem("feedId");
+  const feedId = localStorage.getItem(STORAGE.FEED_ID);
 
   const isInvalid =
     !feedId ||
@@ -10,7 +11,7 @@ export const PublicRoute = () => {
     isNaN(Number(feedId));
 
   if (isInvalid) {
-    if (feedId) localStorage.removeItem("feedId");
+    if (feedId) localStorage.removeItem(STORAGE.FEED_ID);
     return <Outlet />;
   }
 
