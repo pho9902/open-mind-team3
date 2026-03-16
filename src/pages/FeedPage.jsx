@@ -9,7 +9,6 @@ import QuestionList from "@/components/containers/Question/QuestionList";
 import NotFoundPage from "@/pages/NotFoundPage/NotFoundPage";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
-import { openToast } from "@/utils/toast";
 
 export default function FeedPage() {
   const [subjectData, setSubjectData] = useState(null);
