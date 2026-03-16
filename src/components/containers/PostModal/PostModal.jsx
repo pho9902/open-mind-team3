@@ -27,6 +27,7 @@ export default function PostModal({
       await subjectApi.createQuestion(subjectId, questionContent);
       if (onSuccess) onSuccess(); // 질문 생성 후 성공 콜백 호출
       onClose(); // 질문 생성 후 모달 닫기
+      openToast.success("질문이 성공적으로 생성되었습니다.");
     } catch (error) {
       console.error("질문 생성 실패:", error);
       openToast.error("질문 생성에 실패했습니다. 다시 시도해주세요.");

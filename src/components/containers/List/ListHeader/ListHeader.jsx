@@ -4,6 +4,7 @@ import * as S from "@/components/containers/List/ListHeader/ListHeader.style";
 import { SecondButton } from "@/components/common/Button/Button.style";
 import LogoImg from "@/assets/img/LogoImg";
 import { ArrowRight2Icon } from "@/assets/icons/ArrowRight2Icon";
+import { STORAGE } from "@/constants";
 
 export default function ListHeader() {
   const navigate = useNavigate();
