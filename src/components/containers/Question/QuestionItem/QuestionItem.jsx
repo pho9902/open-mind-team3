@@ -4,9 +4,9 @@ import { formatDate } from "@/utils/formatDate";
 import AnswerItem from "@/components/containers/Question/AnswerItem/AnswerItem";
 import ReactionButtons from "@/components/containers/Question/ReactionButtons/ReactionButtons";
 import AnswerInput from "@/components/containers/Question/AnswerInput";
+import Kebab from "@/components/containers/Question/QuestionItem/Kebab";
 
 import * as S from "@/components/containers/Question/QuestionItem/QuestionItem.style";
-import Kebab from "@/components/containers/Question/QuestionItem/Kebab";
 
 export default function QuestionItem({
   question,
@@ -17,7 +17,7 @@ export default function QuestionItem({
   const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <S.Container key={question.id}>
+    <S.Container>
       <S.ItemHeader>
         <S.AnswerStatus $isAnswer={!!answer}>
           {!answer ? "미답변" : answer.isRejected ? "답변 거절" : "답변 완료"}

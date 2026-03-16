@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { subjectApi } from "@/apis/subject";
@@ -21,14 +21,14 @@ const LIMIT = 8;
 
 export default function QuestionList({ subjectData, subjectId, isAnswer }) {
   const [questions, setQuestions] = useState([]);
+  const [totalCount, setTotalCount] = useState(0); // 질문 총 개수
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
-  const [offset, setOffset] = useState(0);
   const [hasNext, setHasNext] = useState(true);
-  const [totalCount, setTotalCount] = useState(0); // 질문 총 개수
 
   const navigate = useNavigate();
+  const offsetRef = useRef(0);
 
   const fetchQuestions = useCallback(
     async (isInitial = false) => {
@@ -36,20 +36,31 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
 
       setIsLoading(true);
       try {
-        const nextOffset = isInitial ? 0 : offset;
+        const nextOffset = isInitial ? 0 : offsetRef.current;
 
         const response = await subjectApi.getQuestions(
           subjectId,
           LIMIT,
           nextOffset,
         );
-        console.log(response.next);
         const { results, next, count } = response;
 
-        setQuestions((prev) => (isInitial ? results : [...prev, ...results]));
+        setQuestions((prev) => {
+          // 1. 초기 로딩(isInitial)일 때는 그냥 새 데이터를 덮어씌웁니다.
+          if (isInitial) return results;
+
+          // 2. 추가 로딩일 때는 기존 리스트(prev)에 없는 데이터만 골라냅니다.
+          const uniqueResults = results.filter(
+            (newQuestion) =>
+              !prev.some((oldQuestion) => oldQuestion.id === newQuestion.id),
+          );
+
+          // 3. 기존 데이터 + 중복되지 않은 새 데이터만 합칩니다.
+          return [...prev, ...uniqueResults];
+        });
         setTotalCount(count);
-        setOffset(nextOffset + LIMIT);
         setHasNext(!!next);
+        offsetRef.current = nextOffset + results.length;
       } catch (error) {
         openToast.error("질문 목록을 가져오는데 실패했습니다.");
         console.error("Error fetching questions:", error);
@@ -57,10 +68,13 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
         setIsLoading(false);
       }
     },
-    [subjectId, offset, isLoading, hasNext],
+    [subjectId, isLoading, hasNext],
   );
 
   useEffect(() => {
+    setQuestions([]);
+    setHasNext(true);
+    offsetRef.current = 0;
     fetchQuestions(true);
   }, [subjectId]);
 
@@ -105,7 +119,7 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
           <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
         )}
 
-        {isLoading && (
+        {questions.length > 0 && isLoading && (
           <S.SpinnerWrapper>
             <LoadingSpinner size={40} />
           </S.SpinnerWrapper>
@@ -132,7 +146,7 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
           subjectId={subjectId}
           subjectData={subjectData}
           onClose={() => setIsOpen(false)}
-          onSuccess={fetchQuestions}
+          onSuccess={() => fetchQuestions(true)}
         />
       )}
 
