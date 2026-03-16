@@ -10,6 +10,35 @@
 - **Routing:** React Router 7
 - **HTTP Client:** Axios
 
+## 시작하기
+
+### 1. Installation
+
+- 프로젝트를 로컬에 복제한 후 의존성 패키지를 설치합니다.
+
+```Bash
+git clone https://github.com/pho9902/open-mind-team3.git
+
+# 해당 디렉토리로 cd 후
+npm install
+```
+
+### 2. Development
+
+- 로컬 개발 서버를 실행합니다. 기본적으로 http://localhost:5173에서 확인할 수 있습니다.
+
+```Bash
+npm run dev
+```
+
+### 3. Build
+
+- 프로덕션 환경을 위한 빌드 파일을 생성합니다. 결과물은 /dist 폴더에 저장됩니다.
+
+```Bash
+npm run build
+```
+
 ## 프로젝트 구조
 
 ```text
