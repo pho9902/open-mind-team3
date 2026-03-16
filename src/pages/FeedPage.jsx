@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { subjectApi } from "@/apis/subject";
+import { STORAGE } from "@/constants/index";
 import FeedHeader from "@/components/containers/Question/FeedHeader/FeedHeader";
 import QuestionList from "@/components/containers/Question/QuestionList";
 
@@ -15,9 +16,16 @@ export default function FeedPage() {
 
   const isAnswer = subpath === "answer";
 
+  const myFeedId = localStorage.getItem(STORAGE.FEED_ID);
+  const isMyFeed = String(myFeedId) === String(subjectId);
+
   useEffect(() => {
-    if (subpath && !isAnswer) navigate("/err", { replace: true });
-  }, [subpath, navigate]);
+    if (isMyFeed && !isAnswer) {
+      navigate(`/post/${subjectId}/answer`, { replace: true });
+    } else if (subpath && !isAnswer) {
+      navigate("/err", { replace: true });
+    }
+  }, [subjectId, subpath, navigate, isAnswer, isMyFeed]);
 
   /* 질문대상자 정보 가져오기 */
   useEffect(() => {
