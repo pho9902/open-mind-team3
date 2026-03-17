@@ -14,7 +14,8 @@ export default function ShareButtons({ subjectData, $isScroll }) {
   // Todo: 배포 후에 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
   const handleCopyLink = async () => {
     try {
-      const currentUrl = `${window.location.origin}${pathname}`;
+      const basePath = pathname.replace(/\/answer$/, "");
+      const currentUrl = `${window.location.origin}${basePath}`;
       await navigator.clipboard.writeText(currentUrl);
       openToast.success("URL이 복사되었습니다");
     } catch (error) {
@@ -24,7 +25,8 @@ export default function ShareButtons({ subjectData, $isScroll }) {
 
   // Todo: 배포하고 다시 확인하기 - 게시물에 대한 공유가 아직 확인 안 됨
   const shareToFacebook = () => {
-    const currentUrl = `${window.location.origin}${pathname}`;
+    const basePath = pathname.replace(/\/answer$/, "");
+    const currentUrl = `${window.location.origin}${basePath}`;
     const sharedLink = encodeURIComponent(currentUrl);
     window.open(
       `https://www.facebook.com/sharer/sharer.php?u=${sharedLink}`,
@@ -43,10 +45,12 @@ export default function ShareButtons({ subjectData, $isScroll }) {
       Kakao.init(import.meta.env.VITE_KAKAO_KEY);
     }
 
+    const basePath = pathname.replace(/\/answer$/, "");
+
     Kakao.Share.sendCustom({
       templateId: TEMPLATE_ID,
       templateArgs: {
-        path: pathname.startsWith("/") ? pathname.substring(1) : pathname,
+        path: pathname.startsWith("/") ? basePath.substring(1) : basePath,
         name: subjectData?.name || "",
         like: subjectData?.like || 0,
       },
