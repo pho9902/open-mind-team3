@@ -52,6 +52,7 @@ export const AnswerText = styled.div`
   ${({ theme }) => theme.typography.body3};
   color: ${({ $isRejected, theme }) =>
     $isRejected ? theme.colors.red : theme.colors.gray60};
+  white-space: pre-wrap;
 `;
 
 export const InputSection = styled.div`

@@ -19,10 +19,10 @@ export const subjectApi = {
   // 피드가 가진 질문들 조회
   getQuestions: (subjectId, limit = 8, offset = 0) =>
     instance.get(`subjects/${subjectId}/questions/`, {
-      params: { limit, offset },
+      params: { limit, offset, subjectId },
     }),
 
   // 피드에 질문 요청
   createQuestion: (subjectId, content) =>
-    instance.post(`subjects/${subjectId}/questions/`, { content }),
+    instance.post(`subjects/${subjectId}/questions/`, { subjectId, content }),
 };
