@@ -47,12 +47,35 @@ export const AnswerProfileDate = styled.span`
   color: ${({ theme }) => theme.colors.gray40};
 `;
 
-// Todo: 답변 보여질 텍스트 줄 수 정해서 적용하기
+export const TextWrapper = styled.div`
+  position: relative;
+`;
+
 export const AnswerText = styled.div`
   ${({ theme }) => theme.typography.body3};
   color: ${({ $isRejected, theme }) =>
     $isRejected ? theme.colors.red : theme.colors.gray60};
   white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: ${({ $isExpanded }) => ($isExpanded ? "none" : 3)};
+  overflow: hidden;
+  word-break: break-word;
+`;
+
+export const MoreBtn = styled.span`
+  ${({ theme }) => theme.typography.caption1Medium};
+  color: ${({ theme }) => theme.colors.gray40};
+  margin-top: 4px;
+  cursor: pointer;
+`;
+
+export const FoldBtn = styled.span`
+  margin-top: 4px;
+  background: none;
+  border: none;
+  color: ${({ theme }) => theme.colors.gray40};
+  cursor: pointer;
 `;
 
 export const InputSection = styled.div`
