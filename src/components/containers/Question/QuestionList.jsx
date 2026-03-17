@@ -13,7 +13,6 @@ import QuestionItems from "@/components/containers/Question/QuestionItems/Questi
 import PostModal from "@/components/containers/PostModal/PostModal";
 import Confirm from "@/components/common/Confirm";
 import InfiniteScrollObserver from "@/components/common/InfiniteScroll/InfiniteScrollObserver";
-import SkeletonQuestion from "@/components/containers/Question/SkeletonQuestion/SkeletonQuestion";
 
 import * as S from "@/components/containers/Question/QuestionList.style";
 
@@ -96,29 +95,25 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
         </S.ButtonWrapper>
       )}
 
-      {isLoading && questions.length === 0 ? (
-        <SkeletonQuestion />
-      ) : (
-        <S.QuestionListWrapper>
-          <QuestionCount totalCount={totalCount} />
-          <QuestionItems
-            questions={questions}
-            isAnswer={isAnswer}
-            fetchQuestions={() => fetchQuestions(true)}
-            subjectData={subjectData}
-          />
+      <S.QuestionListWrapper>
+        <QuestionCount totalCount={totalCount} />
+        <QuestionItems
+          questions={questions}
+          isAnswer={isAnswer}
+          fetchQuestions={() => fetchQuestions(true)}
+          subjectData={subjectData}
+        />
 
-          {!isLoading && hasNext && questions.length > 0 && (
-            <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
-          )}
+        {!isLoading && hasNext && questions.length > 0 && (
+          <InfiniteScrollObserver onIntersect={() => fetchQuestions(false)} />
+        )}
 
-          {isLoading && questions.length > 0 && (
-            <S.SpinnerWrapper>
-              <LoadingSpinner size={50} />
-            </S.SpinnerWrapper>
-          )}
-        </S.QuestionListWrapper>
-      )}
+        {isLoading && questions.length > 0 && (
+          <S.SpinnerWrapper>
+            <LoadingSpinner size={50} />
+          </S.SpinnerWrapper>
+        )}
+      </S.QuestionListWrapper>
 
       <S.FloatingGroup>
         <S.FloatingButtonWrapper>
