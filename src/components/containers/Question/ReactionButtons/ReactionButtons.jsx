@@ -72,7 +72,6 @@ export default function ReactionButtons({ question }) {
       await questionApi.createReaction(id, "like");
       openToast.success("좋아요가 등록되었습니다.");
     } catch (error) {
-      console.error("좋아요 처리 중 오류 발생:", error);
       openToast.error("좋아요 등록에 실패했습니다. 다시 시도해주세요.");
       setLikeCount((prev) => prev - 1);
     }
@@ -83,7 +82,7 @@ export default function ReactionButtons({ question }) {
     e.preventDefault();
 
     if (isDislikeClicked) {
-      openToast("이미 싫어요를 누른 상태입니다.");
+      openToast.error("이미 싫어요를 누른 상태입니다.");
       return;
     }
 
@@ -102,8 +101,6 @@ export default function ReactionButtons({ question }) {
 
       openToast.success("싫어요가 등록되었습니다.");
     } catch (error) {
-      console.error("싫어요 처리 중 오류 발생:", error);
-
       setDislikeCount((prev) => prev - 1);
       setIsDislikeClicked(false);
       openToast.error("싫어요 등록에 실패했습니다.");

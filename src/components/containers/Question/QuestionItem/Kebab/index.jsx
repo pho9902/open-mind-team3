@@ -34,6 +34,7 @@ export default function Kebab({
 
     try {
       let targetAnswerId = answer?.id;
+
       // 답변이 없는경우 더미 답변 생성 후 개별조회
       if (!targetAnswerId) {
         await questionApi.createAnswer(question.id, "거절용 더미 답변");

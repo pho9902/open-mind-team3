@@ -1,10 +1,13 @@
 import { useState } from "react";
-import * as S from "../AnswerItem/AnswerItem.style";
-import { TextArea } from "@/components/common/Input/Input.style";
+
 import { questionApi } from "@/apis/question";
 import { answerApi } from "@/apis/answer";
+
+import { TextArea } from "@/components/common/Input/Input.style";
 import { openToast } from "@/utils/toast";
 import placeholderImage from "@/assets/img/user-placeholderImage.svg";
+
+import * as S from "../AnswerItem/AnswerItem.style";
 
 export default function AnswerInput({
   userProfile = placeholderImage,

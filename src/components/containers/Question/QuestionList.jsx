@@ -58,7 +58,6 @@ export default function QuestionList({ subjectData, subjectId, isAnswer }) {
         offsetRef.current = currentOffset + results.length;
       } catch (error) {
         openToast.error("질문 목록을 가져오는데 실패했습니다.");
-        console.error("Error fetching questions:", error);
       } finally {
         setIsLoading(false);
       }

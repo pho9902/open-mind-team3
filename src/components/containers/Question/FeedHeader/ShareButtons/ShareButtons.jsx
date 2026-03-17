@@ -18,7 +18,6 @@ export default function ShareButtons({ subjectData, $isScroll }) {
       await navigator.clipboard.writeText(currentUrl);
       openToast.success("URL이 복사되었습니다");
     } catch (error) {
-      console.error("링크 복사 실패:", error);
       openToast.error("URL 복사에 실패했습니다");
     }
   };

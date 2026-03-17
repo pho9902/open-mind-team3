@@ -60,8 +60,7 @@ export default function ListMain() {
       setTotalCount(count);
       setSubjects(sortedSubjects(results));
     } catch (error) {
-      console.error("ListMain 로딩 실패", error);
-      openToast("데이터를 불러오는 데 실패했습니다");
+      openToast.error("데이터를 불러오는 데 실패했습니다");
     } finally {
       clearTimeout(timer);
       setIsFirstLoading(false);

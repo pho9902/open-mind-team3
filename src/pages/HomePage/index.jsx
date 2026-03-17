@@ -6,7 +6,6 @@ export default function HomePage() {
   return (
     <S.HomeWrapper>
       <HomeHeader />
-
       <HomeButtonContainer />
     </S.HomeWrapper>
   );

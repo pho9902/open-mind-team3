@@ -7,7 +7,7 @@ import GlobalStyle from "@/styles/GlobalStyle";
 
 import { PublicRoute } from "@/components/routes/PublicRoute";
 import HomePage from "@/pages/HomePage";
-import ListPage from "@/pages/ListPage";
+import ListPage from "@/pages/ListPage/ListPage";
 import FeedPage from "@/pages/FeedPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 

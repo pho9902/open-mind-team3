@@ -54,7 +54,7 @@ export default function FeedPage() {
         setIsError(
           error.response?.data?.detail || "데이터를 가져오는데 실패했습니다.",
         );
-        openToast("존재하지 않는 사용자입니다.");
+        openToast.error("존재하지 않는 사용자입니다.");
       } finally {
         setIsLoading(false);
       }
