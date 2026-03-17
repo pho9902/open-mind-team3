@@ -91,4 +91,5 @@ export const ReactionCount = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
+  white-space: nowrap;
 `;

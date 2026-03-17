@@ -54,7 +54,6 @@ export default function ListMain() {
     }, 1000);
 
     try {
-      // throw new Error("test");
       const response = await subjectApi.getFeedList(1000, 0);
       const { count, results } = response;
       setTotalCount(count);
