@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { questionApi } from "@/apis/question";
 import { openToast } from "@/utils/toast";
 
@@ -18,14 +18,30 @@ export default function ReactionButtons({ question }) {
 
   const clickCount = useRef(0);
   const timerRef = useRef(null);
+  const effectTimerRef = useRef(new Set()); // effect timer 저장
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+
+      effectTimerRef.current.forEach((timerId) => {
+        clearTimeout(timerId);
+      });
+      effectTimerRef.current.clear();
+    };
+  }, []);
 
   const triggerEffect = () => {
     const effectId = Date.now();
     setShowEffect((prev) => [...prev, effectId]);
 
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setShowEffect((prev) => prev.filter((id) => id !== effectId));
+      effectTimerRef.current.delete(timer);
     }, 2000);
+    effectTimerRef.current.add(timer);
   };
 
   /* 좋아요 무한클릭 */
