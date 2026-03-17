@@ -7,7 +7,7 @@ import { ThumbsUpIcon } from "@/assets/icons/ThumbsUpIcon";
 
 import * as S from "@/components/containers/Question/ReactionButtons/ReactionButtons.style";
 
-export default function ReactionButtons({ question }) {
+export default function ReactionButtons({ question, isAnswer }) {
   const { id, like, dislike } = question;
   const [likeCount, setLikeCount] = useState(like);
   const [dislikeCount, setDislikeCount] = useState(dislike);
@@ -51,6 +51,11 @@ export default function ReactionButtons({ question }) {
   const handleLikeClick = async (e) => {
     e.preventDefault();
 
+    if (isAnswer) {
+      openToast.error("내 질문에는 좋아요를 누를 수 없습니다.");
+      return;
+    }
+
     clickCount.current += 1;
     setLikeCount((prev) => prev + 1);
 
@@ -80,6 +85,11 @@ export default function ReactionButtons({ question }) {
   /* 싫어요 클릭 */
   const handleDislikeClick = async (e) => {
     e.preventDefault();
+
+    if (isAnswer) {
+      openToast.error("내 질문에는 싫어요를 누를 수 없습니다.");
+      return;
+    }
 
     if (isDislikeClicked) {
       openToast.error("이미 싫어요를 누른 상태입니다.");

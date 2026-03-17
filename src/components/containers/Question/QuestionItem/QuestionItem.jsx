@@ -67,7 +67,7 @@ export default function QuestionItem({
       )}
 
       <S.Line />
-      <ReactionButtons question={question} />
+      <ReactionButtons question={question} isAnswer={isAnswer} />
     </S.Container>
   );
 }
