@@ -31,7 +31,6 @@ export const useCreateFeed = () => {
       setPending(true);
 
       const data = await subjectApi.createFeed(inputName);
-      localStorage.setItem("feedId", data.id);
       openToast("새 피드가 생성되었어요.");
       localStorage.setItem(STORAGE.FEED_ID, data.id);
 

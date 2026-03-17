@@ -21,11 +21,11 @@ export default function HomeButtonContainer() {
         질문하러 가기
       </BasicButton>
 
-      {isDropdownOpen ? (
-        <Dropdown onClick={handleDropdownButtonClick} />
-      ) : (
+      {!isDropdownOpen && (
         <DefaultDropdownButton onClick={handleDropdownButtonClick} />
       )}
+
+      {isDropdownOpen && <Dropdown onClick={handleDropdownButtonClick} />}
     </S.ButtonContainer>
   );
 }
