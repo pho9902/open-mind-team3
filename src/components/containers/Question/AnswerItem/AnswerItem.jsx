@@ -49,7 +49,7 @@ export default function AnswerItem({ answer, subjectData }) {
           </S.AnswerText>
 
           {!isExpanded && isOverflow && (
-            <S.MoreBtn onClick={handleExpand}>...더보기</S.MoreBtn>
+            <S.MoreBtn onClick={handleExpand}>더보기</S.MoreBtn>
           )}
 
           {isExpanded && (
