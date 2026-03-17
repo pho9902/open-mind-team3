@@ -28,7 +28,6 @@ export default function ListCard({ subject }) {
       const response = await subjectApi.getQuestions(id, 2, 0);
       setQuestionContent(response.results || []);
     } catch (e) {
-      console.error("질문 로드 실패", e);
       openToast("질문을 불러오는 데 실패했습니다");
     } finally {
       setIsLoading(false);

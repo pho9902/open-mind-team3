@@ -8,7 +8,7 @@ import { STORAGE } from "@/constants";
 
 export default function ListHeader() {
   const navigate = useNavigate();
-  const feedId = localStorage.getItem("feedId");
+  const feedId = localStorage.getItem(STORAGE.FEED_ID);
   const handleAuthNavigation = () => {
     navigate(feedId ? `/post/${feedId}/answer` : "/");
   };

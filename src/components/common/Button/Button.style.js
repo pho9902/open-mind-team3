@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { media } from "@/styles/media";
 
 export const BasicButton = styled.button`
-  ${({ theme }) => theme.typography.caption1Regular}
+  ${({ theme }) => theme.typography.caption1Regular};
   color: ${({ theme }) => theme.colors.gray10};
   background-color: ${({ theme }) => theme.colors.brown40};
 
