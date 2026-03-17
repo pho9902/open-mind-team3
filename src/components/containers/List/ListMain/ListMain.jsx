@@ -5,15 +5,21 @@ import { useDeviceType } from "@/hooks/useDeviceType";
 import { ArrowUpIcon } from "@/assets/icons/ArrowUpIcon";
 import { ArrowDownIcon } from "@/assets/icons/ArrowDownIcon";
 import { subjectApi } from "@/apis/subject";
+import { LoadingSpinner } from "@/assets/icons/LoadingSpinnerIcon";
+import { openToast } from "@/utils/toast";
 
 import * as S from "@/components/containers/List/ListMain/ListMain.style";
 import ListCard from "@/components/containers/List/ListCard/ListCard";
 import Pagination from "@/components/common/Pagination/index";
 import InfiniteScrollObserver from "@/components/common/InfiniteScroll/InfiniteScrollObserver";
+import SkeletonList from "@/components/containers/List/SkeletonList/SkeletonList";
 
 export default function ListMain() {
   const [subjects, setSubjects] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
+  const [isFirstLoading, setIsFirstLoading] = useState(false);
+  const [showSpinner, setShowSpinner] = useState(false);
+  const [loadedPage, setLoadedPage] = useState(1);
 
   const { isPC, isLargeTablet } = useDeviceType();
   const isDesktopMode = isPC || isLargeTablet;
@@ -41,13 +47,25 @@ export default function ListMain() {
   };
 
   const fetchSubject = useCallback(async () => {
+    setIsFirstLoading(true);
+    setShowSpinner(false);
+    const timer = setTimeout(() => {
+      setShowSpinner(true);
+    }, 1000);
+
     try {
+      // throw new Error("test");
       const response = await subjectApi.getFeedList(1000, 0);
       const { count, results } = response;
       setTotalCount(count);
       setSubjects(sortedSubjects(results));
     } catch (error) {
-      //로딩 스피너 토스트??
+      console.error("ListMain 로딩 실패", error);
+      openToast("데이터를 불러오는 데 실패했습니다");
+    } finally {
+      clearTimeout(timer);
+      setIsFirstLoading(false);
+      setShowSpinner(false);
     }
   }, [sortBy]);
 
@@ -68,15 +86,13 @@ export default function ListMain() {
 
   const displaySubjects = isDesktopMode
     ? subjects?.slice((currentPage - 1) * LIMIT, currentPage * LIMIT)
-    : subjects?.slice(0, currentPage * LIMIT);
+    : subjects?.slice(0, loadedPage * LIMIT);
 
   const loadMore = useCallback(() => {
-    if (currentPage < totalPage) {
-      const newParams = new URLSearchParams(searchParams);
-      newParams.set("page", (currentPage + 1).toString());
-      setSearchParams(newParams);
+    if (loadedPage < totalPage) {
+      setLoadedPage((prev) => prev + 1);
     }
-  }, [currentPage, totalPage, searchParams, setSearchParams]);
+  }, [loadedPage, totalPage]);
 
   return (
     <S.MainSection>
@@ -101,13 +117,22 @@ export default function ListMain() {
           )}
         </S.SelectContainer>
       </S.MainHeader>
-
-      <S.CardGrid>
-        {displaySubjects.map((item) =>
-          item ? <ListCard key={item.id} subject={item} /> : null,
-        )}
-      </S.CardGrid>
-
+      {isFirstLoading && displaySubjects.length == 0 ? (
+        <SkeletonList />
+      ) : (
+        <>
+          <S.CardGrid $isLoading={showSpinner}>
+            {displaySubjects.map((item) =>
+              item ? <ListCard key={item.id} subject={item} /> : null,
+            )}
+          </S.CardGrid>
+          {showSpinner && (
+            <S.SpinnerWrapper>
+              <LoadingSpinner />
+            </S.SpinnerWrapper>
+          )}
+        </>
+      )}
       {isDesktopMode ? (
         <Pagination totalPage={totalPage} />
       ) : (

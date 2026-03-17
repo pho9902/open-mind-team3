@@ -46,6 +46,8 @@ export const CardGrid = styled.div`
   grid-template-columns: repeat(2, 1fr);
   padding: 0 24px;
   gap: 16px;
+  opacity: ${({ $isLoading }) => ($isLoading ? 0.5 : 1)};
+  transition: opacity 0.2s;
 
   ${media.tablet`
     grid-template-columns: repeat(auto-fill, minmax(186px, 1fr));
@@ -145,5 +147,18 @@ export const OptionItem = styled.li`
   &:hover {
     color: ${({ theme }) => theme.colors.blue};
     font-weight: 500;
+  }
+`;
+
+export const SpinnerWrapper = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+  
+  svg {
+    width: 50px;
+    height: 50px;
   }
 `;
