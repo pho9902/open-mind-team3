@@ -150,7 +150,7 @@ src/
 ## 👨‍👩‍👧‍👦 팀원 소개 - 코드잇 23기 3팀
 | 박승현 | 박주헌 | 박현우 | 윤지원 |
 |:------:|:------:|:------:|:------:|
-| <img src="https://github.com/user-attachments/assets/3fcdc35d-c064-404e-a5f6-4283027fb939" width="250" /> | <img src="https://github.com/user-attachments/assets/2cb60b10-934d-42d4-acbd-f3d172aa27b4" width="250" /> | <img src="https://github.com/user-attachments/assets/c2cd6f7f-7911-4f08-8dfd-794dee52e336" width="250" /> | <img src="https://github.com/user-attachments/assets/2ddd2454-753a-4133-a843-dcd7bf0ddc15" width="250" /> |
+| <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/3bc675d1-a60b-40b6-9a6a-b8a0aa59c7c9" />| <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/f7cb796f-d299-4e72-a022-3c2e2819948c" />| <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/6d111dba-d2f8-4935-90bf-5d0470bae097" />| <img width="250" height="250" alt="image" src="https://github.com/user-attachments/assets/d84c2053-c5be-4ca2-81a5-a58058f92319" />|
 | **github**: [hanpla](https://github.com/hanpla) | **github**: [JuHeonParkk](https://github.com/JuHeonParkk) | **github**: [pho9902](https://github.com/pho9902) | **github**: [jiwonll](https://github.com/jiwonll) |
 
 <br>
